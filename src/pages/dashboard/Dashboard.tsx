@@ -10,9 +10,6 @@ interface DashboardProps {
 
 const Dashboard = ({
   onAddTransaction,
-  onViewReports,
-  onViewGoals,
-  onOpenSettings,
   onConnectBank
 }: DashboardProps) => {
   return (
