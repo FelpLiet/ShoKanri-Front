@@ -1,0 +1,283 @@
+@use '../../styles/variables' as *;
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-secondary;
+  overflow: auto;
+  width: 100%;
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: $bg-primary;
+    box-shadow: $shadow-sm;
+    
+    h1 {
+      font-size: 1.5rem;
+      color: $text-primary;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      
+      button {
+        background-color: $primary;
+        color: $white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        
+        &:hover {
+          background-color: $primary-light;
+        }
+        
+        .icon {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+          background-color: rgba($white, 0.3);
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+  
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 30px;
+    flex-grow: 1;
+    
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .side-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  
+  .balance-overview {
+    background-color: $bg-primary;
+    border-radius: 10px;
+    box-shadow: $shadow-md;
+    padding: 20px;
+    
+    .balance-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      
+      h2 {
+        font-size: 1.1rem;
+        color: $text-primary;
+        margin: 0;
+      }
+      
+      .period-selector {
+        select {
+          padding: 5px 10px;
+          border: 1px solid $border-light;
+          border-radius: 5px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .balance-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      
+      .balance-amount {
+        .amount {
+          font-size: 2.2rem;
+          font-weight: bold;
+          color: $text-primary;
+          margin-bottom: 5px;
+        }
+        
+        .label {
+          font-size: 0.9rem;
+          color: $text-tertiary;
+        }
+      }
+      
+      .balance-change {
+        align-self: flex-start;
+        background-color: $success-light;
+        color: $success;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        
+        &.negative {
+          background-color: $error-light;
+          color: $error;
+        }
+      }
+    }
+  }
+  
+  .transaction-summary {
+    display: flex;
+    gap: 20px;
+    
+    .summary-item {
+      flex: 1;
+      background-color: $bg-primary;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: $shadow-md;
+      
+      .summary-label {
+        font-size: 0.9rem;
+        color: $text-tertiary;
+        margin-bottom: 10px;
+      }
+      
+      .summary-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: $text-primary;
+      }
+      
+      &.income .summary-amount {
+        color: $income;
+      }
+      
+      &.expenses .summary-amount {
+        color: $expense;
+      }
+    }
+  }
+  
+  .chart-container {
+    background-color: $bg-primary;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: $shadow-md;
+    
+    h3 {
+      font-size: 1.1rem;
+      color: $text-primary;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    
+    .chart-placeholder {
+      height: 300px;
+      background-color: $bg-secondary;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .placeholder-text {
+        color: $text-tertiary;
+      }
+    }
+  }
+  
+  .recent-transactions {
+    background-color: $bg-primary;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: $shadow-md;
+    height: 100%;
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      
+      h3 {
+        font-size: 1.1rem;
+        color: $text-primary;
+        margin: 0;
+      }
+      
+      .view-all {
+        background: none;
+        border: none;
+        color: $primary;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+    }
+    
+    .transactions-list {
+      .transaction-item {
+        display: flex;
+        padding: 15px 0;
+        border-bottom: 1px solid $border-light;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .transaction-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          margin-right: 15px;
+          
+          &.grocery {
+            background-color: $warning;
+          }
+          
+          &.salary {
+            background-color: $income;
+          }
+        }
+        
+        .transaction-details {
+          flex-grow: 1;
+          
+          .transaction-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+          
+          .transaction-date {
+            font-size: 0.8rem;
+            color: $text-tertiary;
+          }
+        }
+        
+        .transaction-amount {
+          font-weight: bold;
+          
+          &.expense {
+            color: $expense;
+          }
+          
+          &.income {
+            color: $income;
+          }
+        }
+      }
+    }
+  }
+  
+  // Remove bottom navigation for desktop
+  .bottom-nav {
+    display: none;
+  }
+}

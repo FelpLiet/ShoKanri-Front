@@ -1,0 +1,226 @@
+@use '../../styles/variables' as *;
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-secondary;
+  overflow: auto;
+  
+  .settings-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: $bg-primary;
+    box-shadow: $shadow-md;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    .back-button {
+      background: none;
+      border: none;
+      color: $primary;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+      color: $text-primary;
+      margin: 0;
+    }
+  }
+  
+  .profile-section {
+    display: flex;
+    align-items: center;
+    background-color: $bg-primary;
+    padding: 20px;
+    margin-bottom: 15px;
+    
+    .profile-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: $primary;
+      color: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    
+    .profile-info {
+      flex-grow: 1;
+      
+      h2 {
+        margin: 0 0 5px;
+        font-size: 1.2rem;
+        color: $text-primary;
+      }
+      
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: $text-tertiary;
+      }
+    }
+    
+    .edit-profile-button {
+      background: none;
+      border: none;
+      color: $primary;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+  }
+  
+  .settings-group {
+    margin-bottom: 15px;
+    
+    h3 {
+      padding: 0 20px;
+      margin: 0 0 5px;
+      font-size: 0.85rem;
+      color: $text-tertiary;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    
+    .settings-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background-color: $bg-primary;
+      
+      .settings-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid $border-light;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &.danger {
+          .settings-label {
+            color: $error;
+          }
+          
+          .settings-icon {
+            background-color: $error-light;
+          }
+        }
+        
+        .settings-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background-color: rgba($primary, 0.1);
+          margin-right: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          &.account { background-color: rgba($success, 0.1); }
+          &.password { background-color: rgba($primary, 0.15); }
+          &.notification { background-color: rgba($warning, 0.1); }
+          &.currency { background-color: rgba($warning, 0.1); }
+          &.language { background-color: rgba($info, 0.1); }
+          &.theme { background-color: rgba($primary-dark, 0.1); }
+          &.export { background-color: rgba($primary, 0.15); }
+          &.backup { background-color: rgba($success, 0.1); }
+          &.delete { background-color: $error-light; }
+          &.help { background-color: rgba($info, 0.1); }
+          &.privacy { background-color: rgba($success, 0.1); }
+          &.terms { background-color: rgba($warning, 0.1); }
+          &.version { background-color: rgba($medium-gray, 0.1); }
+        }
+        
+        .settings-label {
+          flex-grow: 1;
+          color: $text-primary;
+          font-size: 1rem;
+        }
+        
+        .settings-value {
+          color: $text-tertiary;
+          font-size: 0.9rem;
+          margin-right: 10px;
+        }
+        
+        .settings-arrow {
+          color: $light-gray;
+          font-size: 1.5rem;
+          font-weight: 300;
+          margin-left: 5px;
+        }
+        
+        .settings-toggle {
+          position: relative;
+          width: 50px;
+          height: 24px;
+          
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            
+            &:checked + label {
+              background-color: $primary;
+              
+              &:before {
+                transform: translateX(26px);
+              }
+            }
+          }
+          
+          label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $medium-gray;
+            border-radius: 24px;
+            transition: .4s;
+            
+            &:before {
+              position: absolute;
+              content: "";
+              height: 20px;
+              width: 20px;
+              left: 2px;
+              bottom: 2px;
+              background-color: $white;
+              border-radius: 50%;
+              transition: .4s;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .logout-button {
+    background-color: $bg-primary;
+    border: none;
+    color: $error;
+    font-size: 1rem;
+    padding: 15px 0;
+    margin: 10px 20px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    
+    &:hover {
+      background-color: rgba($bg-primary, 0.8);
+    }
+  }
+}

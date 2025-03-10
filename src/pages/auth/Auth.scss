@@ -1,0 +1,250 @@
+@use '../../styles/variables' as *;
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  
+  .auth-banner {
+    flex: 1;
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    position: relative;
+    overflow: hidden;
+    
+    .banner-content {
+      z-index: 2;
+      text-align: center;
+      padding: 0 40px;
+      
+      .app-logo {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+      
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+      
+      p {
+        font-size: 1.1rem;
+        max-width: 500px;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+      
+      .features {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
+        .feature {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          
+          .feature-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba($white, 0.2);
+            margin-right: 15px;
+          }
+          
+          .feature-text {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+    
+    .banner-decoration {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70%;
+      height: 70%;
+      background-color: rgba($white, 0.1);
+      border-radius: 100% 0 0 0;
+      z-index: 1;
+    }
+  }
+  
+  .auth-form-container {
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    background-color: $bg-primary;
+    position: relative;
+    
+    h1 {
+      margin-bottom: 40px;
+      color: $text-primary;
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      margin-bottom: 30px;
+      
+      button {
+        flex: 1;
+        padding: 15px;
+        border: 1px solid $border-light;
+        background-color: $bg-primary;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          background-color: $bg-secondary;
+          transform: translateY(-2px);
+          box-shadow: $shadow-md;
+        }
+        
+        .button-icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          background-color: $light-gray;
+          border-radius: 4px;
+        }
+        
+        &.google-btn {
+          color: $info;
+        }
+        
+        &.apple-btn {
+          color: $text-primary;
+        }
+      }
+    }
+    
+    .divider {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      margin: 30px 0;
+      color: $text-tertiary;
+      
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 45%;
+        height: 1px;
+        background-color: $border-light;
+      }
+      
+      &::before {
+        left: 0;
+      }
+      
+      &::after {
+        right: 0;
+      }
+    }
+    
+    form {
+      width: 100%;
+      
+      .form-group {
+        margin-bottom: 25px;
+        
+        label {
+          display: block;
+          margin-bottom: 10px;
+          color: $text-secondary;
+          font-size: 1rem;
+        }
+        
+        input {
+          width: 100%;
+          padding: 15px;
+          border: 1px solid $border-light;
+          border-radius: 8px;
+          font-size: 1rem;
+          transition: border-color 0.2s ease;
+          
+          &:focus {
+            outline: none;
+            border-color: $primary;
+          }
+        }
+      }
+      
+      .forgot-password {
+        text-align: right;
+        margin-bottom: 30px;
+        
+        a {
+          color: $primary;
+          text-decoration: none;
+          font-weight: 500;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: $primary;
+        color: $white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: $primary-light;
+          transform: translateY(-2px);
+          box-shadow: $shadow-md;
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+    
+    .switch-mode {
+      margin-top: 30px;
+      color: $text-secondary;
+      text-align: center;
+      font-size: 1rem;
+      
+      a {
+        color: $primary;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 5px;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

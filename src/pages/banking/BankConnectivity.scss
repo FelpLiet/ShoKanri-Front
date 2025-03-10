@@ -1,0 +1,291 @@
+@use '../../styles/variables' as *;
+
+.bank-connectivity-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-secondary;
+  overflow: auto;
+  
+  .banking-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: $bg-primary;
+    box-shadow: $shadow-md;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+    .back-button {
+      background: none;
+      border: none;
+      color: $primary;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+      color: $text-primary;
+      margin: 0;
+    }
+  }
+  
+  .banking-info {
+    background-color: $bg-primary;
+    padding: 20px;
+    margin-bottom: 15px;
+    
+    p {
+      margin: 0;
+      color: $text-secondary;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+  
+  .connected-banks,
+  .available-banks,
+  .manual-option {
+    margin-bottom: 15px;
+    
+    h2 {
+      padding: 0 20px;
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: $text-primary;
+    }
+    
+    .no-banks {
+      background-color: $bg-primary;
+      padding: 30px;
+      text-align: center;
+      color: $text-tertiary;
+      border-radius: 8px;
+      margin: 0 15px;
+    }
+    
+    .bank-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      .bank-item {
+        display: flex;
+        align-items: center;
+        background-color: $bg-primary;
+        padding: 15px 20px;
+        border-bottom: 1px solid $border-light;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &.available {
+          cursor: pointer;
+          
+          &:hover {
+            background-color: rgba($bg-primary, 0.8);
+          }
+        }
+        
+        .bank-logo-placeholder {
+          width: 50px;
+          height: 50px;
+          background-color: $bg-tertiary;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 15px;
+          
+          &.large {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+          }
+          
+          .placeholder-text {
+            font-size: 0.7rem;
+            color: $text-tertiary;
+            text-align: center;
+          }
+        }
+        
+        .bank-info {
+          flex-grow: 1;
+          
+          .bank-name {
+            font-weight: 500;
+            color: $text-primary;
+            margin-bottom: 5px;
+          }
+          
+          .bank-status {
+            font-size: 0.85rem;
+            color: $text-tertiary;
+          }
+        }
+        
+        .disconnect-button {
+          background: none;
+          border: 1px solid $error;
+          color: $error;
+          padding: 8px 12px;
+          border-radius: 5px;
+          font-size: 0.85rem;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: $error-light;
+          }
+        }
+        
+        .bank-arrow {
+          color: $light-gray;
+          font-size: 1.5rem;
+          font-weight: 300;
+        }
+      }
+    }
+    
+    .manual-entry-card {
+      display: flex;
+      align-items: center;
+      background-color: $bg-primary;
+      padding: 15px 20px;
+      cursor: pointer;
+      margin: 0 15px;
+      border-radius: 8px;
+      
+      &:hover {
+        background-color: rgba($bg-primary, 0.8);
+      }
+      
+      .manual-icon {
+        width: 50px;
+        height: 50px;
+        background-color: rgba($primary, 0.1);
+        border-radius: 8px;
+        margin-right: 15px;
+      }
+      
+      .manual-info {
+        flex-grow: 1;
+        
+        .manual-title {
+          font-weight: 500;
+          color: $text-primary;
+          margin-bottom: 5px;
+        }
+        
+        .manual-description {
+          font-size: 0.85rem;
+          color: $text-tertiary;
+        }
+      }
+      
+      .manual-arrow {
+        color: $light-gray;
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+    }
+  }
+  
+  .bank-connection-form {
+    background-color: $bg-primary;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    
+    .selected-bank {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+      
+      h2 {
+        margin: 15px 0 0;
+        font-size: 1.3rem;
+        color: $text-primary;
+      }
+    }
+    
+    form {
+      .form-group {
+        margin-bottom: 20px;
+        
+        label {
+          display: block;
+          margin-bottom: 8px;
+          color: $text-secondary;
+          font-size: 0.9rem;
+        }
+        
+        input {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid $border-light;
+          border-radius: 5px;
+          font-size: 1rem;
+          
+          &:focus {
+            border-color: $primary;
+            outline: none;
+          }
+        }
+      }
+      
+      .security-notice {
+        background-color: $bg-secondary;
+        border-left: 4px solid $primary;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        
+        p {
+          margin: 0;
+          font-size: 0.85rem;
+          color: $text-secondary;
+          line-height: 1.5;
+        }
+      }
+      
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        
+        button {
+          flex: 1;
+          padding: 12px;
+          border-radius: 5px;
+          font-size: 1rem;
+          cursor: pointer;
+          
+          &.cancel-button {
+            background-color: $bg-primary;
+            border: 1px solid $border-light;
+            color: $text-tertiary;
+            margin-right: 10px;
+            
+            &:hover {
+              background-color: $bg-secondary;
+            }
+          }
+          
+          &.connect-button {
+            background-color: $primary;
+            border: none;
+            color: $white;
+            
+            &:hover {
+              background-color: $primary-light;
+            }
+          }
+        }
+      }
+    }
+  }
+}

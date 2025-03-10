@@ -1,0 +1,185 @@
+@use '../../styles/variables' as *;
+
+.add-transaction-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $bg-primary;
+  
+  header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: $bg-primary;
+    box-shadow: $shadow-sm;
+    
+    .back-button {
+      background: none;
+      border: none;
+      color: $primary;
+      cursor: pointer;
+    }
+    
+    h1 {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 1.3rem;
+      color: $text-primary;
+    }
+  }
+  
+  .transaction-form {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px;
+    
+    .transaction-type {
+      display: flex;
+      margin-bottom: 30px;
+      
+      .type-button {
+        flex: 1;
+        padding: 15px;
+        text-align: center;
+        border: none;
+        background-color: $bg-tertiary;
+        font-size: 1rem;
+        cursor: pointer;
+        
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+        
+        &:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+        
+        &.expense.active {
+          background-color: $expense;
+          color: $white;
+        }
+        
+        &.income.active {
+          background-color: $income;
+          color: $white;
+        }
+      }
+    }
+    
+    .amount-input {
+      position: relative;
+      margin-bottom: 30px;
+      
+      .currency {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.8rem;
+        color: $text-tertiary;
+      }
+      
+      input {
+        width: 100%;
+        padding: 20px 20px 20px 50px;
+        font-size: 2rem;
+        border: 2px solid $border-light;
+        border-radius: 8px;
+        text-align: right;
+        
+        &:focus {
+          border-color: $primary;
+          outline: none;
+        }
+      }
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: $text-secondary;
+        font-size: 1rem;
+      }
+      
+      input, select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid $border-light;
+        border-radius: 5px;
+        font-size: 1rem;
+        
+        &:focus {
+          border-color: $primary;
+          outline: none;
+        }
+      }
+      
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        
+        input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+          
+          &:checked + label {
+            background-color: $primary;
+            
+            &:before {
+              transform: translateX(26px);
+            }
+          }
+        }
+        
+        label {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: $light-gray;
+          border-radius: 34px;
+          transition: .4s;
+          
+          &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: $white;
+            border-radius: 50%;
+            transition: .4s;
+          }
+        }
+      }
+    }
+    
+    .save-button {
+      width: 100%;
+      padding: 15px;
+      background-color: $primary;
+      color: $white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      
+      &:hover {
+        background-color: $primary-light;
+      }
+    }
+  }
+}

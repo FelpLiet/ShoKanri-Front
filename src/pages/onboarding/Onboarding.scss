@@ -1,0 +1,180 @@
+@use '../../styles/variables' as *;
+
+.onboarding-container {
+  display: flex;
+  height: 100vh;
+  background-color: $bg-primary;
+  overflow: hidden;
+  
+  .onboarding-sidebar {
+    width: 40%;
+    background-color: $primary;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+    
+    .app-logo {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+    
+    .sidebar-content {
+      text-align: center;
+      z-index: 2;
+      
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      
+      p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        opacity: 0.9;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+    }
+    
+    .background-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 15vh;
+      background-color: rgba($white, 0.1);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+    }
+  }
+  
+  .onboarding-content {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    
+    .steps-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+      .step {
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translateY(0);
+        transition: transform 0.3s ease-in-out;
+        
+        &.hidden {
+          display: none;
+        }
+        
+        .image-placeholder {
+          width: 350px;
+          height: 350px;
+          background-color: $light-gray;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 40px;
+          
+          .placeholder-text {
+            color: $text-tertiary;
+          }
+        }
+        
+        h2 {
+          font-size: 2.2rem;
+          margin-bottom: 20px;
+          color: $text-primary;
+        }
+        
+        p {
+          color: $text-tertiary;
+          font-size: 1.2rem;
+          line-height: 1.6;
+          max-width: 80%;
+        }
+      }
+    }
+    
+    .navigation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      
+      .pagination {
+        display: flex;
+        margin-bottom: 30px;
+        
+        .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: $light-gray;
+          margin: 0 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          
+          &.active {
+            background-color: $primary;
+            transform: scale(1.2);
+          }
+        }
+      }
+      
+      .navigation-buttons {
+        display: flex;
+        gap: 20px;
+        
+        button {
+          padding: 15px 40px;
+          border-radius: 30px;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        
+        .skip-button {
+          background: none;
+          border: none;
+          color: $text-tertiary;
+          
+          &:hover {
+            color: $text-primary;
+          }
+        }
+        
+        .next-button {
+          background-color: $primary;
+          color: $white;
+          border: none;
+          
+          &:hover {
+            background-color: $primary-light;
+            transform: translateY(-2px);
+            box-shadow: $shadow-lg;
+          }
+          
+          &:active {
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+  }
+}

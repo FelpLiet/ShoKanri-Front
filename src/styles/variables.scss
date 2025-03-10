@@ -1,0 +1,58 @@
+@use 'sass:color';
+
+// Main brand colors
+$primary: #0F0F0F;
+$primary-light: #2A2A2A;
+$primary-dark: #000000;
+
+$secondary: #333333;
+$secondary-light: #4F4F4F;
+$secondary-dark: #1A1A1A;
+
+$accent: #5A5A5A;
+$accent-light: #7A7A7A;
+$accent-dark: #3A3A3A;
+
+// Base colors
+$white: #FFFFFF;
+$off-white: #F5F5F5;
+$light-gray: #E0E0E0;
+$medium-gray: #999999;
+$dark-gray: #666666;
+
+// Functional colors
+$success: #2ECC71;
+$success-light: rgba($success, 0.1);
+
+$error: #E74C3C;
+$error-light: rgba($error, 0.1);
+
+$warning: #F39C12;
+$warning-light: rgba($warning, 0.1);
+
+$info: #3498DB;
+$info-light: rgba($info, 0.1);
+
+// Background colors
+$bg-primary: $white;
+$bg-secondary: $off-white;
+$bg-tertiary: $light-gray;
+
+// Text colors
+$text-primary: $primary;
+$text-secondary: $secondary;
+$text-tertiary: $medium-gray;
+$text-light: $white;
+
+// Border colors
+$border-light: $light-gray;
+$border-medium: color.adjust($light-gray, $lightness: -10%);
+
+// Shadow
+$shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 2px 10px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+// Income/Expense colors
+$income: $success;
+$expense: $error;

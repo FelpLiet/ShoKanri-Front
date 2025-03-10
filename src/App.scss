@@ -1,0 +1,46 @@
+@use './styles/variables' as *;
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+// Add desktop-specific global styles
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $bg-secondary;
+  overflow: hidden;
+  min-width: 1024px; // Set minimum width for desktop
+}
+
+// Content area styles (for pages with sidebar)
+.content-area {
+  flex: 1;
+  overflow: auto;
+  height: 100vh;
+}
+
+// Desktop breakpoints
+$desktop-min: 1024px;
+$large-desktop: 1440px;
+
+// Global button styles for desktop
+button {
+  cursor: pointer;
+  
+  &:focus {
+    outline: 2px solid rgba($primary, 0.5);
+    outline-offset: 2px;
+  }
+}
+
+// Global form styles for desktop
+input, select, textarea {
+  &:focus {
+    outline: 2px solid rgba($primary, 0.5);
+  }
+}
