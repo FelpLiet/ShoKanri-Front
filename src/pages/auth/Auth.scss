@@ -2,72 +2,75 @@
 
 .auth-container {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100vh;
   width: 100%;
-  position: fixed; /* Garante que o contêiner seja posicionado corretamente */
+  height: 100%;
+  position: fixed;
 
   .auth-form-container {
-    width: 450x;
+    width: 450px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-direction: column;
-    justify-content: center;
-    padding: 60px;
+
+    padding: 30px;
     border-radius: 10px;
     border: 1.5px solid $border-light;
 
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); // Sombra suave abaixo
-    position: relative;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     margin: auto;
     background-color: $white-2-figma;
 
-    .logo {
-      width: 150px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .logo-container {
+      .logo {
+        width: 115px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+      }
 
-    h1 {
-      margin-bottom: 40px;
-      color: $text-primary;
-      font-size: 0.9rem;
-      text-align: center;
+      h1 {
+        margin-top: auto;
+        color: $text-primary;
+        font-size: 0.9rem;
+        text-align: center;
+      }
     }
 
     .input-icon {
-      position: absolute; /* Faz o ícone ser posicionado dentro do input */
-      right: 10px; /* Ajuste a distância da borda direita */
-      top: 50%; /* Centraliza verticalmente */
-      transform: translateY(-50%); /* Ajuste fino para centralizar o ícone */
-      pointer-events: none; /* Impede que o ícone interfira com a interação do usuário */
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
     form {
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center; /* Centraliza os itens horizontalmente */
+      align-items: center;
 
       .form-group {
-        width: 100%; /* Faz o grupo ocupar toda a largura do formulário */
-        max-width: 500px; /* Define uma largura máxima para centralizar */
-        margin-bottom: 20px;
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 12px;
         display: flex;
         flex-direction: column;
-        align-items: stretch; /* Garante que os inputs ocupem toda a largura do grupo */
+        align-items: stretch;
 
         label {
           display: block;
           margin-bottom: 8px;
           color: $text-primary;
           font-size: 1rem;
-          text-align: left; /* Alinha o texto do label à esquerda */
+          text-align: left;
         }
 
         input {
-          width: 100%; /* Faz o input ocupar toda a largura do .form-group */
+          width: 100%;
+          height: 45px;
           padding: 15px;
           padding-left: 50px;
           border: 1px solid $border-light;
@@ -83,7 +86,6 @@
             outline: none;
             border-color: $gray-90-figma;
           }
-      
         }
       }
 
@@ -105,9 +107,10 @@
 
       .submit-btn {
         display: flex;
-        justify-content: center; /* Centraliza horizontalmente */
+        justify-content: center;
         align-items: center;
         width: 70%;
+        height: 45px;
         padding: 15px;
         background-color: $primary;
         color: $white;
@@ -121,19 +124,14 @@
 
         &:hover {
           background-color: $green-figma;
-          transform: translateY(-2px);
-          box-shadow: $shadow-md;
-        }
 
-        &:active {
-          transform: translateY(0);
+          box-shadow: $shadow-md;
         }
       }
     }
 
     .switch-mode {
       margin-top: 20px;
-      // color: $text-secondary;
       color: $gray-80-figma;
       text-align: center;
       font-size: 1rem;
@@ -154,36 +152,38 @@
 }
 
 .input-wrapper {
-  position: relative; /* Necessário para posicionar os ícones */
+  position: relative;
   width: 100%;
-
-  
 
   .icon {
     position: absolute;
-    top: 50%; /* Centraliza verticalmente */
-    transform: translateY(-50%); /* Ajuste fino para centralizar */
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 1.2rem;
     color: $text-secondary;
-    pointer-events: none; /* Impede que o ícone interfira na interação do usuário */
+    pointer-events: none;
+  }
+
+  .user-icon {
+    left: 15px;
+    color: $gray-60-figma;
   }
 
   .email-icon {
-    left: 15px; /* Ícone de envelope à esquerda */
+    left: 15px;
     color: $gray-60-figma;
   }
 
   .lock-icon {
-    left: 15px; /* Ícone de cadeado à esquerda */
+    left: 15px;
     color: $gray-60-figma;
   }
 
   .toggle-password {
     position: absolute;
-    top: 25%; /* Centraliza verticalmente */
-    right: 15px; /* Ícone de olho à direita */
-    // background: none;
-    // border: none;
+    top: 25%;
+    right: 15px;
+
     cursor: pointer;
     font-size: 1.2rem;
     color: $gray-60-figma;
