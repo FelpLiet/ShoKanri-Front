@@ -55,11 +55,11 @@ function App() {
       case Screen.DASHBOARD:
         return (
           <Dashboard 
-            onAddTransaction={goToAddTransaction}
+            // onAddTransaction={goToAddTransaction}
             onViewReports={goToReports}
             onViewGoals={goToFinancialGoals}
             onOpenSettings={goToSettings}
-            onConnectBank={goToBankConnectivity}
+            // onConnectBank={goToBankConnectivity}
           />
         );
       case Screen.ADD_TRANSACTION:
@@ -83,10 +83,11 @@ function App() {
         <Sidebar 
           currentScreen={currentScreen}
           onDashboardClick={goToDashboard}
+          onAddTransactionClick={goToAddTransaction} //
           onReportsClick={goToReports}
           onGoalsClick={goToFinancialGoals}
           onSettingsClick={goToSettings}
-          onBankClick={goToBankConnectivity}
+          onBankClick={goToBankConnectivity} //
         />
       )}
       <div className="content-area">

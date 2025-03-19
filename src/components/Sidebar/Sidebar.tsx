@@ -3,6 +3,7 @@ import './Sidebar.scss';
 interface SidebarProps {
   currentScreen: number;
   onDashboardClick: () => void;
+  onAddTransactionClick: () => void;
   onReportsClick: () => void;
   onGoalsClick: () => void;
   onSettingsClick: () => void;
@@ -12,6 +13,7 @@ interface SidebarProps {
 const Sidebar = ({
   currentScreen,
   onDashboardClick,
+  onAddTransactionClick,
   onReportsClick,
   onGoalsClick,
   onSettingsClick,
@@ -52,6 +54,12 @@ const Sidebar = ({
               Dashboard
             </button>
           </li>
+          <li className={currentScreen === Screen.ADD_TRANSACTION ? 'active' : ''}>
+            <button onClick={onAddTransactionClick}>
+              <span className="icon add-icon"></span>
+              Adicionar Transação
+            </button>
+          </li>
           <li className={currentScreen === Screen.REPORTS ? 'active' : ''}>
             <button onClick={onReportsClick}>
               <span className="icon reports-icon"></span>
@@ -67,7 +75,7 @@ const Sidebar = ({
           <li className={currentScreen === Screen.BANK_CONNECTIVITY ? 'active' : ''}>
             <button onClick={onBankClick}>
               <span className="icon bank-icon"></span>
-              Bank Accounts
+              Conectividade Bancária
             </button>
           </li>
           <li className={currentScreen === Screen.SETTINGS ? 'active' : ''}>
