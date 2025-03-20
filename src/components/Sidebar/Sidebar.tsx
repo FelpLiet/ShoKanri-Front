@@ -63,13 +63,13 @@ const Sidebar = ({
           <li className={currentScreen === Screen.REPORTS ? 'active' : ''}>
             <button onClick={onReportsClick}>
               <span className="icon reports-icon"></span>
-              Reports
+              Relatórios
             </button>
           </li>
           <li className={currentScreen === Screen.FINANCIAL_GOALS ? 'active' : ''}>
             <button onClick={onGoalsClick}>
               <span className="icon goals-icon"></span>
-              Financial Goals
+              Metas Financeiras
             </button>
           </li>
           <li className={currentScreen === Screen.BANK_CONNECTIVITY ? 'active' : ''}>
@@ -81,7 +81,7 @@ const Sidebar = ({
           <li className={currentScreen === Screen.SETTINGS ? 'active' : ''}>
             <button onClick={onSettingsClick}>
               <span className="icon settings-icon"></span>
-              Settings
+              Configurações
             </button>
           </li>
         </ul>

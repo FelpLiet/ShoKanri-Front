@@ -85,15 +85,14 @@
   .settings-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-left: 90vh;
     background-color: $bg-primary; //$bg-primary
     
     .settings-item {
       display: flex;
       align-items: center;
       padding: 20px 6px;
-      border-bottom: 1px solid $border-light;
-
+      border-bottom: 1px $border-light;
       
       .settings-toggle {
         position: relative;

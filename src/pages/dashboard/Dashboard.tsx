@@ -17,9 +17,7 @@ const Dashboard = ({
     <div className="dashboard-container">
       <header className="dashboard-header">
         <h1>LOGO ShoKanri</h1>
-        <div className="user-profile">
-          <div className="avatar">JD</div>
-        </div>
+        
         <ul className="settings-list">
           <li className="settings-item">
               <div className="settings-icon theme"></div>
@@ -30,6 +28,10 @@ const Dashboard = ({
               </div>
             </li>
         </ul>
+
+        <div className="user-profile">
+          <div className="avatar">JD</div>
+        </div>
       </header>
       
 
