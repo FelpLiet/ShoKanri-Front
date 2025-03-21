@@ -1,0 +1,26 @@
+{
+  "userLogin": {
+    "userId": 1,
+    "authToken": "lflahfisjflsdlfa"
+  },
+  "user": [
+    {
+      "id": 1,
+      "createdOn": "2025-03-21",
+      "updatedOn": "2025-03-21",
+      "name": "John Doe",
+      "email": "john.doe@gmail.com",
+      "active": true
+    },
+    {
+      "id": 2,
+      "createdOn": "2025-03-20",
+      "updatedOn": "2025-03-20",
+      "name": "Mary Doe",
+      "email": "mary.doe@gmail.com",
+      "active": false
+    }
+  ],
+  "account": [{}],
+  "transaction": [{}]
+}
