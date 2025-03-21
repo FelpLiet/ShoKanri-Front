@@ -1,0 +1,103 @@
+{
+  "userLogin": {
+    "userId": 1,
+    "authToken": "lflahfisjflsdlfa"
+  },
+  "user": [
+    {
+      "id": 1,
+      "createdOn": "2025-03-19",
+      "updatedOn": "2025-03-19",
+      "name": "John Doe",
+      "email": "john.doe@gmail.com",
+      "active": true
+    },
+    {
+      "id": 2,
+      "createdOn": "2025-03-20",
+      "updatedOn": "2025-03-20",
+      "name": "Mary Doe",
+      "email": "mary.doe@gmail.com",
+      "active": false
+    }
+  ],
+  "account": [
+    {
+      "id": 1,
+      "createdOn": "2025-03-19",
+      "updatedOn": "2025-03-19",
+      "userId": 1,
+      "name": "Goals",
+      "description": "Lorem ipsum",
+      "balance": 250.25,
+      "active": true
+    },
+    {
+      "id": 2,
+      "createdOn": "2025-03-20",
+      "updatedOn": "2025-03-20",
+      "userId": 2,
+      "name": "Goals",
+      "description": "Lorem ipsum",
+      "balance": 250.25,
+      "active": true
+    },
+    {
+      "id": 3,
+      "createdOn": "2025-03-20",
+      "updatedOn": "2025-03-20",
+      "userId": 1,
+      "name": "Real Estate",
+      "description": "Lorem ipsum",
+      "balance": 250.25,
+      "active": true
+    },
+    {
+      "id": 4,
+      "createdOn": "2025-03-21",
+      "updatedOn": "2025-03-21",
+      "userId": 1,
+      "name": "Stocks",
+      "description": "Lorem ipsum",
+      "balance": 250.25,
+      "active": true
+    },
+    {
+      "id": 5,
+      "createdOn": "2025-03-21",
+      "updatedOn": "2025-03-21",
+      "userId": 2,
+      "name": "Emergency Reserve",
+      "description": "Lorem ipsum",
+      "balance": 250.25,
+      "active": true
+    }
+  ],
+  "transaction": [
+    {
+      "id": 1,
+      "createdOn": "2025-03-21",
+      "accountId": 1,
+      "description": "Lorem ipsum",
+      "amount": 250.25,
+      "type": "income"
+    },
+    {
+      "id": 2,
+      "createdOn": "2025-03-21",
+      "accountId": 1,
+      "description": "Lorem ipsum",
+      "amount": 100.25,
+      "type": "expense"
+    },
+    {
+      "id": 3,
+      "createdOn": "2025-03-22",
+      "accountId": 4,
+      "description": "Lorem ipsum",
+      "amount": 450.25,
+      "type": "transference",
+      "destinationId": 2
+    }
+  ]
+}
