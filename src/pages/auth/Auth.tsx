@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUser } from "react-icons/fa6";
 import "./Auth.scss";
-import logo from "../../assets/kanri-dark.svg"; // Importando a imagem
+import logo from "../../assets/kanri-dark.svg";
 
 interface AuthProps {
   onLogin: () => void;
@@ -9,26 +9,24 @@ interface AuthProps {
 
 const Auth = ({ onLogin }: AuthProps) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState(""); // Estado para o nome
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Estado para confirmar senha
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar senha
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para mostrar/ocultar senha de confirmar senha
-
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isLogin && password !== confirmPassword) {
       alert("As senhas não coincidem!");
       return;
     }
-    onLogin(); // Simulate successful login or registration
+    onLogin();
   };
 
   return (
     <div className="auth-container">
       <div className="auth-form-container">
-        {/* Adicionando a logo aqui */}
         <div className="logo-container">
           <img src={logo} alt="ShoKanri Logo" className="logo" />
 
@@ -37,7 +35,7 @@ const Auth = ({ onLogin }: AuthProps) => {
               ? "Faça login para visualizar seus dados financeiros."
               : "Cadastre-se agora e comece a gerenciar suas finanças com eficiência."}
           </h1>
-        </div>  
+        </div>
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (
@@ -76,7 +74,7 @@ const Auth = ({ onLogin }: AuthProps) => {
             <label htmlFor="password">Senha</label>
             <div className="input-wrapper">
               <input
-                type={showPassword ? "text" : "password"} // Alterna entre texto e senha
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -87,7 +85,7 @@ const Auth = ({ onLogin }: AuthProps) => {
 
               <span
                 className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)} // Alterna o estado
+                onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
               </span>
@@ -127,14 +125,16 @@ const Auth = ({ onLogin }: AuthProps) => {
           <button type="submit" className="submit-btn">
             {isLogin ? "Entrar" : "Criar conta"}
           </button>
+
+          <div className="switch-mode">
+            {isLogin ? "Ainda não é cadastrado?" : "Já possui cadastro?"}
+            <a href="#" onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? "Cadastre-se" : "Fazer login"}
+            </a>
+          </div>
         </form>
 
-        <div className="switch-mode">
-          {isLogin ? "Ainda não é cadastrado?" : "Já possui cadastro?"}
-          <a href="#" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? "Cadastre-se" : "Fazer login"}
-          </a>
-        </div>
+        <div></div>
       </div>
     </div>
   );
