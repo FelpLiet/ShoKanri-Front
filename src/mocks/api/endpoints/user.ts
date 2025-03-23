@@ -3,11 +3,11 @@ import db from "../db.json" with { type: "json" };
 import { Registry } from "miragejs";
 import { AnyFactories, AnyModels } from "miragejs/-types";
 
-const getLogin: RouteHandler<Registry<AnyModels, AnyFactories>> = () => {
+export const getLogin: RouteHandler<Registry<AnyModels, AnyFactories>> = () => {
   return db.login;
 };
 
-const getById: RouteHandler<Registry<AnyModels, AnyFactories>> = (
+export const getById: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   _schema,
   request
 ) => {
@@ -15,9 +15,4 @@ const getById: RouteHandler<Registry<AnyModels, AnyFactories>> = (
 
   const user = db.user.find((entity) => entity.id === id);
   return user ?? { error: "user not found!" };
-};
-
-export default {
-  getLogin,
-  getById,
 };

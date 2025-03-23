@@ -3,7 +3,7 @@ import db from "../db.json" with { type: "json" };
 import { Registry } from "miragejs";
 import { AnyFactories, AnyModels } from "miragejs/-types";
 
-const getAllByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
+export const getAllByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   _schema,
   request
 ) => {
@@ -15,7 +15,7 @@ const getAllByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   return transactions;
 };
 
-const getAllIncomesByAccountId: RouteHandler<
+export const getAllIncomesByAccountId: RouteHandler<
   Registry<AnyModels, AnyFactories>
 > = (_schema, request) => {
   const accountId = Number(request.params.accountId);
@@ -26,7 +26,7 @@ const getAllIncomesByAccountId: RouteHandler<
   return transactions;
 };
 
-const getAllExpensesByAccountId: RouteHandler<
+export const getAllExpensesByAccountId: RouteHandler<
   Registry<AnyModels, AnyFactories>
 > = (_schema, request) => {
   const accountId = Number(request.params.accountId);
@@ -37,7 +37,7 @@ const getAllExpensesByAccountId: RouteHandler<
   return transactions;
 };
 
-const getAllTransferencesByAccountId: RouteHandler<
+export const getAllTransferencesByAccountId: RouteHandler<
   Registry<AnyModels, AnyFactories>
 > = (_schema, request) => {
   const accountId = Number(request.params.accountId);
@@ -46,11 +46,4 @@ const getAllTransferencesByAccountId: RouteHandler<
     (entity) => entity.accountId === accountId && entity.type === "transference"
   );
   return transactions;
-};
-
-export default {
-  getAllByAccountId,
-  getAllIncomesByAccountId,
-  getAllExpensesByAccountId,
-  getAllTransferencesByAccountId,
 };

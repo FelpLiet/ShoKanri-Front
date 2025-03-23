@@ -3,7 +3,7 @@ import db from "../db.json" with { type: "json" };
 import { Registry } from "miragejs";
 import { AnyFactories, AnyModels } from "miragejs/-types";
 
-const getAllByUserId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
+export const getAllByUserId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   _schema,
   request
 ) => {
@@ -13,7 +13,7 @@ const getAllByUserId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   return accounts;
 };
 
-const getByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
+export const getByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
   _schema,
   request
 ) => {
@@ -24,9 +24,4 @@ const getByAccountId: RouteHandler<Registry<AnyModels, AnyFactories>> = (
     (entity) => entity.id === accountId && entity.userId === userId
   );
   return account ?? { error: "account not found!" };
-};
-
-export default {
-  getAllByUserId,
-  getByAccountId,
 };

@@ -1,31 +1,29 @@
 import { createServer } from "miragejs";
-import account from "./endpoints/account";
-import user from "./endpoints/user";
-import transaction from "./endpoints/transaction";
+import { Account, Transaction, User } from "./endpoints";
 
 export default function () {
   createServer({
     routes() {
       this.urlPrefix = import.meta.env.SK_API_URL;
 
-      this.get("/user/login", user.getLogin);
-      this.get("/user/:id", user.getById);
+      this.get("/user/login", User.getLogin);
+      this.get("/user/:id", User.getById);
 
-      this.get("/account/:userId", account.getAllByUserId);
-      this.get("/account/:userId/:accountId", account.getByAccountId);
+      this.get("/account/:userId", Account.getAllByUserId);
+      this.get("/account/:userId/:accountId", Account.getByAccountId);
 
-      this.get("/transaction/:accountId", transaction.getAllByAccountId);
+      this.get("/transaction/:accountId", Transaction.getAllByAccountId);
       this.get(
         "/transaction/income/:accountId",
-        transaction.getAllIncomesByAccountId
+        Transaction.getAllIncomesByAccountId
       );
       this.get(
         "/transaction/expense/:accountId",
-        transaction.getAllExpensesByAccountId
+        Transaction.getAllExpensesByAccountId
       );
       this.get(
         "/transaction/transference/:accountId",
-        transaction.getAllTransferencesByAccountId
+        Transaction.getAllTransferencesByAccountId
       );
     },
   });
