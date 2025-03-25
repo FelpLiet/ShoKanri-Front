@@ -43,7 +43,7 @@ const FinancialGoals = ({ onBack }: FinancialGoalsProps) => {
     <div className="financial-goals-container">
       <header className="goals-header">
         <button className="back-button" onClick={onBack}>Back</button>
-        <h1>Financial Goals</h1>
+        <h1>Metas Financeiras</h1>
       </header>
 
       <div className="goals-overview">

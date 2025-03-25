@@ -1,8 +1,46 @@
 import './Sidebar.scss';
+import { Moon, Sun } from "lucide-react"
+ 
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useTheme } from "@/components/theme-provider"
+
+export function ModeToggle() {
+  const { setTheme } = useTheme()
+ 
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          Claro
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          Escuro
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          Sistema
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
 interface SidebarProps {
   currentScreen: number;
   onDashboardClick: () => void;
+  onAddTransactionClick: () => void;
   onReportsClick: () => void;
   onGoalsClick: () => void;
   onSettingsClick: () => void;
@@ -12,6 +50,7 @@ interface SidebarProps {
 const Sidebar = ({
   currentScreen,
   onDashboardClick,
+  onAddTransactionClick,
   onReportsClick,
   onGoalsClick,
   onSettingsClick,
@@ -52,29 +91,38 @@ const Sidebar = ({
               Dashboard
             </button>
           </li>
+          <li className={currentScreen === Screen.ADD_TRANSACTION ? 'active' : ''}>
+            <button onClick={onAddTransactionClick}>
+              <span className="icon add-icon"></span>
+              Adicionar Transação
+            </button>
+          </li>
           <li className={currentScreen === Screen.REPORTS ? 'active' : ''}>
             <button onClick={onReportsClick}>
               <span className="icon reports-icon"></span>
-              Reports
+              Relatórios
             </button>
           </li>
           <li className={currentScreen === Screen.FINANCIAL_GOALS ? 'active' : ''}>
             <button onClick={onGoalsClick}>
               <span className="icon goals-icon"></span>
-              Financial Goals
+              Metas Financeiras
             </button>
           </li>
           <li className={currentScreen === Screen.BANK_CONNECTIVITY ? 'active' : ''}>
             <button onClick={onBankClick}>
               <span className="icon bank-icon"></span>
-              Bank Accounts
+              Conectividade Bancária
             </button>
           </li>
           <li className={currentScreen === Screen.SETTINGS ? 'active' : ''}>
             <button onClick={onSettingsClick}>
               <span className="icon settings-icon"></span>
-              Settings
+              Configurações
             </button>
+          </li>
+          <li className={currentScreen === Screen.SETTINGS ? 'active' : ''}>
+            <ModeToggle />
           </li>
         </ul>
       </nav>
