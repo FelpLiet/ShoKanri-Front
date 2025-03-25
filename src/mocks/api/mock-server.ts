@@ -6,8 +6,8 @@ export default function () {
     routes() {
       this.urlPrefix = import.meta.env.SK_API_URL;
 
-      this.get("/user/login", User.getLogin);
-      this.get("/user/:id", User.getById);
+      this.post("/user/register", User.register);
+      this.post("/user/login", User.login);
 
       this.get("/account/:userId", Account.getAllByUserId);
       this.get("/account/:userId/:accountId", Account.getByAccountId);
