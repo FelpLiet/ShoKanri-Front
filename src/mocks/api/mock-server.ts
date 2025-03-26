@@ -8,6 +8,9 @@ export default function () {
 
       this.post("/user/register", User.register);
       this.post("/user/login", User.login);
+      this.delete("/user/:id", User.remove);
+      this.put("/user/:id", User.update);
+      this.get("/user/:id", User.getById);
 
       this.get("/account/:userId", Account.getAllByUserId);
       this.get("/account/:userId/:accountId", Account.getByAccountId);
