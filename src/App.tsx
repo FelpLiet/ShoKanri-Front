@@ -13,6 +13,7 @@ import FinancialGoals from './pages/goals/FinancialGoals';
 import Settings from './pages/settings/Settings';
 import BankConnectivity from './pages/banking/BankConnectivity';
 import Sidebar from './components/Sidebar/Sidebar';
+import LandingPage from './pages/landing/LandingPage';
 
 function App() {
   enum Screen {
@@ -24,10 +25,11 @@ function App() {
     REPORTS,
     FINANCIAL_GOALS,
     SETTINGS,
-    BANK_CONNECTIVITY
+    BANK_CONNECTIVITY,
+    LANDING
   }
   
-  const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.SPLASH);
+  const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.LANDING);
 
   // Navigation handlers
   const goToOnboarding = () => setCurrentScreen(Screen.ONBOARDING);
@@ -42,11 +44,14 @@ function App() {
   // Determine if we should show the sidebar
   const showSidebar = currentScreen !== Screen.SPLASH && 
                      currentScreen !== Screen.ONBOARDING && 
-                     currentScreen !== Screen.AUTH;
+                     currentScreen !== Screen.AUTH &&
+                     currentScreen !== Screen.LANDING;
 
   // Render the current screen
   const renderScreen = () => {
     switch (currentScreen) {
+      case Screen.LANDING:
+        return <LandingPage onGetStarted={goToAuth} />;
       case Screen.SPLASH:
         return <SplashScreen onComplete={goToOnboarding} />;
       case Screen.ONBOARDING:
