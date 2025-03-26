@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ThemeProvider } from "@/components/theme-provider"
 import './App.scss';
 
 // Import page components
@@ -55,11 +56,11 @@ function App() {
       case Screen.DASHBOARD:
         return (
           <Dashboard 
-            onAddTransaction={goToAddTransaction}
+            // onAddTransaction={goToAddTransaction}
             onViewReports={goToReports}
             onViewGoals={goToFinancialGoals}
             onOpenSettings={goToSettings}
-            onConnectBank={goToBankConnectivity}
+            // onConnectBank={goToBankConnectivity}
           />
         );
       case Screen.ADD_TRANSACTION:
@@ -78,21 +79,26 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      {showSidebar && (
-        <Sidebar 
-          currentScreen={currentScreen}
-          onDashboardClick={goToDashboard}
-          onReportsClick={goToReports}
-          onGoalsClick={goToFinancialGoals}
-          onSettingsClick={goToSettings}
-          onBankClick={goToBankConnectivity}
-        />
-      )}
-      <div className="content-area">
-        {renderScreen()}
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      {/* {children} */}
+    
+      <div className="app-container">
+        {showSidebar && (
+          <Sidebar 
+            currentScreen={currentScreen}
+            onDashboardClick={goToDashboard}
+            onAddTransactionClick={goToAddTransaction} //
+            onReportsClick={goToReports}
+            onGoalsClick={goToFinancialGoals}
+            onSettingsClick={goToSettings}
+            onBankClick={goToBankConnectivity} //
+          />
+        )}
+        <div className="content-area">
+          {renderScreen()}
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

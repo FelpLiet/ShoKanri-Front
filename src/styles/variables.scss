@@ -1,4 +1,28 @@
 @use 'sass:color';
+@layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 240 10% 3.9%;
+
+      --chart-1: 12 76% 61%;
+      --chart-2: 173 58% 39%;
+      --chart-3: 197 37% 24%;
+      --chart-4: 43 74% 66%;
+      --chart-5: 27 87% 67%;
+    }
+  
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 100%;
+
+      --chart-1: 220 70% 50%;
+      --chart-2: 160 60% 45%;
+      --chart-3: 30 80% 55%;
+      --chart-4: 280 65% 60%;
+      --chart-5: 340 75% 55%;
+    }
+  }
+  
 
 // Main brand colors
 $primary: #0F0F0F;
@@ -56,3 +80,31 @@ $shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.15);
 // Income/Expense colors
 $income: $success;
 $expense: $error;
+
+
+//Primaries colors -figma
+$white-figma: #F2F2F2;
+$white-2-figma: #F5F5F5;
+$white-3-figma: #E5E5E5;
+$green-figma: #0AA64D;
+$green-2-figma: #07823d;
+$yellow-figma: #F2C029;
+$orange-figma: #D9961A;
+$dark-gray-figma:#404040;
+
+//Grays colors - figma
+$gray-90-figma: #1A1918;
+$gray-80-figma: #333130;
+$gray-60-figma: #4D4A49;
+$gray-50-figma: #666261;
+$gray-40-figma: #807B79;
+$gray-20-figma: #B2ABAA;
+
+//Neutrals colors - figma
+$black-figma: #000000;
+
+//System colors - figma
+$error-figma: #E43626;
+$warning-figma: #FFC60B;
+$success-figma: #17C50A;
+$info-figma: #1E76D5;
