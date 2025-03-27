@@ -28,7 +28,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: calc(100vh - 60px);
+  // height: calc(100vh - 60px);
+  height: 100vh;
 }
 
 // Desktop breakpoints
