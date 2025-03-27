@@ -243,34 +243,50 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             autoplay
             loop
             src={animationData}
-            style={{ height: '200px', width: '200px' }}
+            className='hero-animation'
           />
           <h1>Sho-Kanri</h1>
           <div className="hero-description">
             <p>Controle suas finanças de forma simples e eficiente</p>
-            <Button onClick={onGetStarted} size="lg" className="login-button">Get Started</Button>
+            <Button onClick={onGetStarted} size="lg">Get Started</Button>
           </div>
           
           <ScrollArrow targetSection="about" />
         </section>
         
         <section id="about" className="about snap-section">
-          <div className="about-card">
-            <img src={dinheiroPath} alt="" />
-            <h3>O que é?</h3>
-            <p>Nosso gerenciador financeiro é uma plataforma completa para organizar, monitorar e planejar suas finanças, reunindo todas as contas e transações em um único lugar.</p>
+          <div className="about-logo">
+            <Player
+              autoplay
+              loop
+              src={animationData}
+              className='about-animation'
+              />
+            <img src={nameSvg} alt="Sho-Kanri" />
           </div>
-          <div className="about-card">
-            <img src={usuariosPath} alt="" />
-            <h3>Para quem é?</h3>
-            <p>Desenvolvido para profissionais autônomos, pequenas empresas e famílias que buscam controle e transparência em suas finanças.</p>
+          <div className="about-container">
+            <div className="about-card">
+              <img src={dinheiroPath} style={{width: '49px'}} alt="money icon" />
+              <div className="about-text">
+                <h3>O que é?</h3>
+                <p>Nosso gerenciador financeiro é uma plataforma completa para organizar, monitorar e planejar suas finanças, reunindo todas as contas e transações em um único lugar.</p>
+              </div>
+            </div>
+            <div className="about-card">
+              <img src={usuariosPath} style={{width: '49px'}} alt="" />
+              <div className="about-text">
+                <h3>Para quem é?</h3>
+                <p>Desenvolvido para profissionais autônomos, pequenas empresas e famílias que buscam controle e transparência em suas finanças.</p>
+              </div>
+            </div>
+            <div className="about-card">
+              <img src={cofrinhoPath} style={{width: '49px'}} alt="" />
+              <div className="about-text">
+                <h3>Solução?</h3>
+                <p>Ele ajuda a eliminar a confusão na gestão financeira, facilitando o acompanhamento dos gastos, o planejamento de orçamentos e a análise de desempenho financeiro</p>
+              </div>
+            </div>
           </div>
-          <div className="about-card">
-            <img src={cofrinhoPath} alt="" />
-            <h3>Solução?</h3>
-            <p>Ele ajuda a eliminar a confusão na gestão financeira, facilitando o acompanhamento dos gastos, o planejamento de orçamentos e a análise de desempenho financeiro</p>
-          </div>
-          
           <ScrollArrow targetSection="features" />
         </section>
 

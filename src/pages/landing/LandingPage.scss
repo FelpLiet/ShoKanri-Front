@@ -2,9 +2,6 @@
 
 .landing-page {
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: relative;
   
   // Hide scrollbar but keep functionality
   scrollbar-width: none; /* Firefox */
@@ -12,21 +9,6 @@
   
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
-  }
-}
-
-.login-button {
-  background: linear-gradient(45deg, #232527, #4a4b4c);
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: 500;
-  transition: background 0.2s;
-  
-  &:hover {
-    background: linear-gradient(45deg, #1d2124, #232527);
   }
 }
 
@@ -220,7 +202,6 @@
 }
 
 .landing-content {
-  position: relative;
 
   section {
     min-height: 100vh;
@@ -241,6 +222,10 @@
     text-align: center;
     padding-top: 80px;
     
+    .hero-animation{
+      height: 200px;
+    }
+
     h1 {
       color: var($primary);
       font-size: 8rem;
@@ -259,27 +244,68 @@
   
   .about {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 100px;
+    height: 100%;
     padding-top: 80px;
-    
-    .about-card {
-      background-color: white;
-      border-radius: 12px;
-      padding: 2rem;
-      width: 300px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    .about-logo{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+      max-width: 400px;
       
-      h3 {
-        margin-top: 0;
-        margin-bottom: 1rem;
-        font-size: 1.4rem;
+      .about-animation{
+        height: 100px;
       }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      gap: 1rem;
+      height: 323px;
+      width: 100%;
+      .about-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        border-radius: 15px;
+        padding: 32px;
+        gap: 14px;
+        width: 100%;
+        max-width: 418px;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       
-      p {
-        line-height: 1.6;
+        .about-text{
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          h3 {
+            margin-top: 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: var($primary);
+          }
+          
+          p {
+            font-weight: 500;
+            font-size: 18px;
+            text-align: justify;
+
+          }
+        }
       }
     }
   }
@@ -389,17 +415,33 @@
 @media (max-width: 1024px) {
   .landing-content {
     .hero {
+      .hero-animation{
+        height: 150px;
+      }
+
       h1 {
         font-size: 6rem;
         letter-spacing: 10px;
       }
+
+      p {
+        font-size: 1.3rem;
+      }
     }
     
     .about {
-      padding: 100px 10px 0;
+      padding-top: 80px;
+      gap: 2rem;
       
-      .about-card {
-        width: 280px;
+      .about-container {
+        gap: 1rem;
+        height: 400px;
+        
+        .about-card {
+          width: 100%;
+          max-width: 400px;
+          margin: 0 15px;
+        }
       }
     }
   }
@@ -428,14 +470,35 @@
     }
     
     .about {
-      padding-top: 80px;
-      gap: 1.5rem;
-      
-      .about-card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 15px;
+      justify-content: flex-start;
+      gap: 0;
+      .about-logo{
+        gap: 0.5rem;
+        max-width: 300px;
       }
+      .about-container {
+        gap: 0.5rem;
+        height: 250px;
+        flex-wrap: wrap;
+        .about-card {
+          padding: 1rem;
+          margin: 0 10px;
+          max-width: 300px;
+          
+          .about-text{
+            h3 {
+              font-size: 1.2rem;
+            }
+            
+            p {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+     
+      
+      
     }
     
     .call-to-action {
@@ -450,66 +513,53 @@
 // Mobile-specific styles
 @media (max-width: 480px) {
   .landing-header {
-    padding: 10px 15px;
-    
-    .logo {
-      gap: 8px;
-      
-      img:last-child {
-        max-width: 100px; // Smaller logo text on mobile
-      }
-    }
+    padding: 15px 10px;
     
     .options {
-      gap: 0.8rem;
-      justify-content: center;
-      padding-bottom: 5px;
+      gap: 1rem;
       
       a {
-        font-size: 12px;
-        padding: 5px 3px;
+        font-size: 14px;
       }
-    }
-    
-    button {
-      padding: 0.5rem 0.8rem;
-      font-size: 0.8rem;
     }
   }
   
   .landing-content {
     .hero {
-      padding-top: 60px;
-      
       h1 {
-        font-size: 2.8rem;
-        letter-spacing: 4px;
-        margin-top: 0.5rem;
+        font-size: 3.5rem;
+        letter-spacing: 6px;
       }
       
       p {
         font-size: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      
-      .login-button {
-        padding: 0.6rem 1.5rem;
+        padding: 0 10px;
       }
     }
     
     .about {
-      padding-top: 60px;
-      
-      .about-card {
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        
-        h3 {
-          font-size: 1.2rem;
-        }
-        
-        p {
-          font-size: 0.9rem;
+      .about-logo{
+        gap: 0.5rem;
+        max-width: 200px;
+      }
+      .about-container {
+        gap: 0.5rem;
+        height: 200px;
+        flex-wrap: wrap;
+        .about-card {
+          padding: 1rem;
+          margin: 0 10px;
+          max-width: 200px;
+          
+          .about-text{
+            h3 {
+              font-size: 1rem;
+            }
+            
+            p {
+              font-size: 0.8rem;
+            }
+          }
         }
       }
     }
@@ -517,46 +567,13 @@
     .call-to-action {
       h2 {
         font-size: 1.5rem;
-        padding: 0 15px;
+        padding: 0 10px;
       }
     }
   }
   
-  .floating-element {
-    &.mock1, &.mock2 {
-      transform: none !important; // Remove 3D effect on small screens for better visibility
-      animation: float 8s ease-in-out infinite alternate !important;
-    }
-    
-    &.mock1 {
-      width: 75%;
-      top: 25%;
-      right: -10%;
-    }
-    
-    &.mock2 {
-      width: 65%;
-      left: -10%;
-      top: 55%;
-    }
-  }
-  
-  .scroll-down-arrow {
-    bottom: 15px;
-    
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
-  
-  .snap-section {
-    padding-bottom: 50px;
-  }
-  
   .landing-footer {
     padding: 1rem;
-    font-size: 0.8rem;
   }
 }
 
