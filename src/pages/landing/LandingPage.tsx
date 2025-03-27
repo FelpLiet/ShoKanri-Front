@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import './LandingPage.scss';
 import { Button } from '@/components/ui/button';
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -21,6 +21,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState('hero');
   const indicatorRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+  }
+  , []);
 
   const floatingElements = [
     { 
@@ -52,6 +58,38 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     },
     
   ];
+
+  useEffect(() => {
+    // Se o menu não estiver aberto, não precisamos fazer nada
+    if (!menuOpen) return;
+
+    // Função para verificar se o clique foi fora do menu
+    const handleClickOutside = (event: MouseEvent) => {
+      // Pegamos o elemento do menu
+      const menuBox = document.querySelector('.menu__box');
+      const menuBtn = document.querySelector('.menu__btn');
+      
+      // Se clicar fora do menu e não no botão, fechamos o menu
+      if (
+        menuBox && 
+        !menuBox.contains(event.target as Node) &&
+
+        menuBtn && 
+        !menuBtn.contains(event.target as Node)
+      ) {
+        closeMenu();
+      }
+    };
+
+    // Adicionar evento de clique ao documento
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    // Limpeza ao desmontar
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen, closeMenu]);
+
 
   // Add smooth scrolling behavior
   useEffect(() => {
@@ -210,6 +248,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     }
   };
 
+  // Close menu when clicking a navigation item
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId);
+    setMenuOpen(false);
+  };
+
   // Arrow component for reusability
   const ScrollArrow = ({ targetSection }: { targetSection: string }) => (
     <div className="scroll-down-arrow" onClick={() => scrollToSection(targetSection)}>
@@ -221,6 +265,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
 
   return (
     <div className="landing-page smooth-scroll-container" ref={ref}>
+      {menuOpen && (
+        <div 
+          className="menu-overlay" 
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
+      
       <div className="floating-background">
         {floatingElements.map((element, index) => (
           <div
@@ -238,13 +290,36 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           <img src={logoSvg} alt="Sho-Kanri logo" style={{width: '30px'}} />
           <img src={nameSvg} alt="Sho-Kanri" />
         </div>
-        <div className='options'>
+        
+        {/* Hamburger Menu (shows on mobile) */}
+        <div className="hamburger-menu">
+          <input 
+            id="menu__toggle" 
+            type="checkbox" 
+            checked={menuOpen}
+            onChange={() => setMenuOpen(!menuOpen)}
+          />
+          <label className="menu__btn" htmlFor="menu__toggle">
+            <span></span>
+          </label>
+
+          <ul className="menu__box">
+            <li><a className={`menu__item ${activeSection === 'hero' ? 'active' : ''}`} href="#hero" onClick={() => handleNavClick('hero')}>Início</a></li>
+            <li><a className={`menu__item ${activeSection === 'about' ? 'active' : ''}`} href="#about" onClick={() => handleNavClick('about')}>Sobre</a></li>
+            <li><a className={`menu__item ${activeSection === 'features' ? 'active' : ''}`} href="#features" onClick={() => handleNavClick('features')}>Features</a></li>
+            <li><Button className="menu__item" onClick={onGetStarted}>Login</Button></li>
+          </ul>
+        </div>
+        
+        {/* Desktop Navigation (hides on mobile) */}
+        <div className='options desktop-nav'>
           <a href='#hero' className={activeSection === 'hero' ? 'active' : ''}>Início</a>
           <a href='#about' className={activeSection === 'about' ? 'active' : ''}>Sobre</a>
           <a href='#features' className={activeSection === 'features' ? 'active' : ''}>Features</a>
           <div className="nav-indicator" ref={indicatorRef}></div>
         </div>
-        <Button onClick={onGetStarted}>Login</Button>
+        
+        <Button onClick={onGetStarted} className="desktop-login">Login</Button>
       </header>
       
       <main className="landing-content">

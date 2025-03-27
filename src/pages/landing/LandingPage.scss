@@ -135,6 +135,7 @@
   }
 }
 
+// Fix landing header and options positioning
 .landing-header {
   position: fixed;
   width: 100%;
@@ -153,10 +154,13 @@
     gap: 15px;
   }
   
-  .options {
+  // Fix desktop nav positioning
+  .options.desktop-nav {
     display: flex;
     gap: 2rem;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     padding-bottom: 10px;
     
     a {
@@ -185,18 +189,6 @@
       transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
                   width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .landing-header {
-    .options {
-      gap: 1rem;
-      
-      a {
-        font-size: 14px;
-      }
     }
   }
 }
@@ -790,6 +782,145 @@
           }
         }
       }
+    }
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Fundo escuro semitransparente
+  z-index: 95; // Acima de quase tudo, mas abaixo do menu
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.hamburger-menu {
+  display: none;
+  position: relative;
+  z-index: 101; // Higher than header z-index
+  
+  #menu__toggle {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+  }
+  
+  #menu__toggle:checked + .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  
+  #menu__toggle:checked + .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  
+  #menu__toggle:checked + .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  
+  #menu__toggle:checked ~ .menu__box {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .menu__btn {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 102; // Above everything
+  }
+  
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    transition-duration: .25s;
+  }
+  
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+  
+  .menu__box {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    gap: 10px;
+    margin: 0;
+    border-radius: 15px;
+    padding: 80px 0 30px;
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, .2);
+    transition: right 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 101;
+    overflow-y: auto;
+    
+    .menu__item {
+      text-align: center;
+      margin: 20px;
+      font-size: 1.4rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      
+      button {
+        margin-left: 20px;
+      }
+    }
+  }
+  
+}
+
+// Responsive adjustments for the navigation - improve mobile breakpoint handling
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+  
+  .desktop-nav, .desktop-login {
+    display: none !important; // Ensure these are hidden
+  }
+  
+  .landing-header {
+    justify-content: space-between;
+    padding: 15px 20px;
+    
+    .options {
+      display: none !important; // Force hide all desktop options
     }
   }
 }
