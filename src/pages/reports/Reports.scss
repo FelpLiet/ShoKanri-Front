@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .reports-container {
   display: flex;
@@ -6,7 +6,7 @@
   height: 100vh;
   background-color: $bg-secondary;
   overflow: auto;
-  
+
   .reports-header {
     display: flex;
     align-items: center;
@@ -16,7 +16,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    
+
     .back-button {
       background: none;
       border: none;
@@ -25,52 +25,58 @@
       cursor: pointer;
       margin-right: 20px;
     }
-    
+
     h1 {
-      font-size: 1.5rem;
+      flex-grow: 1;
+      text-align: center;
+      padding-right: 60px;
+      font-size: 1.3rem;
       color: $text-primary;
       margin: 0;
     }
   }
-  
+
   .period-selector {
     display: flex;
-    padding: 15px;
+    padding: 10px;
     background-color: $bg-primary;
-    margin-bottom: 15px;
-    overflow-x: auto;
-    
+    margin: 0 15px 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: $shadow-md;
+
     .period-button {
       background: none;
       border: none;
       color: $text-tertiary;
       font-size: 0.9rem;
-      padding: 8px 15px;
+      padding: 2px 15px 3px 15px;
       margin-right: 10px;
       border-radius: 20px;
       cursor: pointer;
-      
+
       &.active {
         background-color: $primary;
         color: $white;
       }
     }
   }
-  
+
   .main-chart {
     background-color: $bg-primary;
     margin: 0 15px 15px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: $shadow-md;
-    
+
     h2 {
       font-size: 1.2rem;
       color: $text-primary;
       margin-top: 0;
       margin-bottom: 15px;
     }
-    
+
     .chart-placeholder {
       height: 300px;
       background-color: $bg-secondary;
@@ -78,27 +84,27 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       .placeholder-text {
         color: $text-tertiary;
       }
     }
   }
-  
+
   .category-breakdown {
     background-color: $bg-primary;
     margin: 0 15px 15px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: $shadow-md;
-    
+
     h2 {
       font-size: 1.2rem;
       color: $text-primary;
       margin-top: 0;
       margin-bottom: 15px;
     }
-    
+
     .pie-chart-placeholder {
       height: 200px;
       background-color: $bg-secondary;
@@ -107,52 +113,52 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
-      
+
       .placeholder-text {
         color: $text-tertiary;
       }
     }
-    
+
     .category-list {
       .category-item {
         display: flex;
         align-items: center;
         margin-bottom: 15px;
-        
+
         .category-color {
           width: 15px;
           height: 15px;
           border-radius: 4px;
           margin-right: 10px;
-          
+
           &.food {
             background-color: $warning;
           }
-          
+
           &.transport {
             background-color: $info;
           }
-          
+
           &.housing {
             background-color: $error;
           }
-          
+
           &.entertainment {
             background-color: $success;
           }
         }
-        
+
         .category-name {
           flex: 2;
           color: $text-primary;
         }
-        
+
         .category-amount {
           flex: 1;
           color: $text-primary;
           font-weight: 500;
         }
-        
+
         .category-percentage {
           width: 50px;
           text-align: right;
@@ -161,28 +167,28 @@
       }
     }
   }
-  
+
   .insights-section {
     background-color: $bg-primary;
     margin: 0 15px 15px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: $shadow-md;
-    
+
     h2 {
       font-size: 1.2rem;
       color: $text-primary;
       margin-top: 0;
       margin-bottom: 15px;
     }
-    
+
     .insight-card {
       display: flex;
       background-color: $bg-secondary;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
-      
+
       .insight-icon {
         width: 40px;
         height: 40px;
@@ -191,7 +197,16 @@
         margin-right: 15px;
         flex-shrink: 0;
       }
-      
+
+      .insight-icon2 {
+        width: 40px;
+        height: 40px;
+        background-color: $primary;
+        border-radius: 50%;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
       .insight-content {
         h3 {
           font-size: 1rem;
@@ -199,7 +214,7 @@
           margin-bottom: 5px;
           color: $text-primary;
         }
-        
+
         p {
           margin: 0;
           font-size: 0.9rem;

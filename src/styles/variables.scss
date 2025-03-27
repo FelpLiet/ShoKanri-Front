@@ -1,60 +1,59 @@
-@use 'sass:color';
+@use "sass:color";
 @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 240 10% 3.9%;
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
-      --chart-1: 12 76% 61%;
-      --chart-2: 173 58% 39%;
-      --chart-3: 197 37% 24%;
-      --chart-4: 43 74% 66%;
-      --chart-5: 27 87% 67%;
-    }
-  
-    .dark {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 100%;
-
-      --chart-1: 220 70% 50%;
-      --chart-2: 160 60% 45%;
-      --chart-3: 30 80% 55%;
-      --chart-4: 280 65% 60%;
-      --chart-5: 340 75% 55%;
-    }
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
   }
-  
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 100%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
 
 // Main brand colors
-$primary: #0F0F0F;
-$primary-light: #2A2A2A;
+$primary: #0f0f0f;
+$primary-light: #2a2a2a;
 $primary-dark: #000000;
 
 $secondary: #333333;
-$secondary-light: #4F4F4F;
-$secondary-dark: #1A1A1A;
+$secondary-light: #4f4f4f;
+$secondary-dark: #1a1a1a;
 
-$accent: #5A5A5A;
-$accent-light: #7A7A7A;
-$accent-dark: #3A3A3A;
+$accent: #5a5a5a;
+$accent-light: #7a7a7a;
+$accent-dark: #3a3a3a;
 
 // Base colors
-$white: #FFFFFF;
-$off-white: #F5F5F5;
-$light-gray: #E0E0E0;
+$white: #ffffff;
+$off-white: #f5f5f5;
+$light-gray: #e0e0e0;
 $medium-gray: #999999;
 $dark-gray: #666666;
 
 // Functional colors
-$success: #2ECC71;
+$success: #2ecc71;
 $success-light: rgba($success, 0.1);
 
-$error: #E74C3C;
+$error: #e74c3c;
 $error-light: rgba($error, 0.1);
 
-$warning: #F39C12;
+$warning: #f39c12;
 $warning-light: rgba($warning, 0.1);
 
-$info: #3498DB;
+$info: #3498db;
 $info-light: rgba($info, 0.1);
 
 // Background colors
@@ -81,30 +80,33 @@ $shadow-lg: 0 5px 15px rgba(0, 0, 0, 0.15);
 $income: $success;
 $expense: $error;
 
-
 //Primaries colors -figma
-$white-figma: #F2F2F2;
-$white-2-figma: #F5F5F5;
-$white-3-figma: #E5E5E5;
-$green-figma: #0AA64D;
+$white-figma: #f2f2f2;
+$white-2-figma: #f5f5f5;
+$white-3-figma: #e5e5e5;
+$white-4-figma: #e5e5e56e;
+$green-figma: #0aa64d;
 $green-2-figma: #07823d;
-$yellow-figma: #F2C029;
-$orange-figma: #D9961A;
-$dark-gray-figma:#404040;
+$yellow-figma: #f2c029;
+$orange-figma: #d9961a;
+$dark-gray-figma: #404040;
 
 //Grays colors - figma
-$gray-90-figma: #1A1918;
+$gray-90-figma: #1a1918;
 $gray-80-figma: #333130;
-$gray-60-figma: #4D4A49;
+$gray-60-figma: #4d4a49;
 $gray-50-figma: #666261;
-$gray-40-figma: #807B79;
-$gray-20-figma: #B2ABAA;
+$gray-40-figma: #807b79;
+$gray-20-figma: #b2abaa;
 
 //Neutrals colors - figma
 $black-figma: #000000;
 
 //System colors - figma
-$error-figma: #E43626;
-$warning-figma: #FFC60B;
-$success-figma: #17C50A;
-$info-figma: #1E76D5;
+$error-figma: #b52a1d;
+$error-2-figma: #ce3729;
+$warning-figma: #ffc60b;
+$success-figma: #17c50a;
+$info-figma: #10539a;
+$info-2-figma: #1d6bbe;
+$info-3-figma: #10539a;

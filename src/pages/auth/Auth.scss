@@ -113,7 +113,6 @@
         width: 70%;
         height: 45px;
         padding: 15px;
-        background-color: $primary;
         color: $white;
         border: none;
         border-radius: 8px;
@@ -122,13 +121,10 @@
         transition: all 0.2s ease;
         margin: 0 auto;
         margin-top: 10px;
-
-        background-color: $green-2-figma;
+        background-color: $primary;
 
         &:hover {
-          background-color: $green-figma;
-
-          box-shadow: $shadow-md;
+          background-color: $primary-light;
         }
       }
     }

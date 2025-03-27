@@ -27,7 +27,10 @@
     }
     
     h1 {
-      font-size: 1.5rem;
+      flex-grow: 1;
+      text-align: center;
+      padding-right: 60px;
+      font-size: 1.3rem;
       color: $text-primary;
       margin: 0;
     }
