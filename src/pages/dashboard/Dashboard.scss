@@ -3,10 +3,9 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  // height: 100vh;
-  // width: 170vh;
-  background-color: $bg-secondary;
+  background-color: #f2f2f2;
   overflow: auto;
+
 
   .dashboard-header {
     display: flex;
@@ -17,28 +16,11 @@
     background-color: $bg-primary;
     box-shadow: $shadow-sm;
 
-    h1 {
-      font-size: 1.5rem;
-      color: $text-primary;
-    }
-
     .user-profile {
       display: flex;
       align-items: center;
-      padding: 20px;
-
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: $primary;
-        color: $white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        margin-right: 15px;
-      }
+      padding: 45px;
+      margin-left: 150vh;
     }
   }
 
@@ -102,8 +84,8 @@
   .dashboard-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    padding: 30px;
+    gap: 20px;
+    padding: 15px;
     flex-grow: 1;
 
     // .main-column {
@@ -158,27 +140,33 @@
             font-size: 1rem;
             font-weight: Regular;
             color: $text-primary;
-            margin: 0px 0px 0px 50px;
+            margin: 0px 0px -15px 50px;
           }
   
           .amount2 {
             font-size: 1.7rem;
             font-weight: bold;
             color: $text-primary;
-            margin: 25px 0px 0px 50px;
+            margin: 25px -50px -20px 50px;
           }
   
           .amount3 {
             font-size: 1rem;
             font-weight: Regular;
             color: $text-primary;
-            margin: 25px 0px 0px 50px;
+            margin: 25px 0px -15px 50px;
           }
   
           .label {
             font-size: 0.85rem;
             color: $text-tertiary;
             margin-left: 50px;
+          }
+
+          .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
           }
         }
   
@@ -209,6 +197,7 @@
 
   // Gráfico de Detalhamento de Cartões
   
+//---------------------------------------------------
 
   //Campo de Visão Geral
   .overview-section {
@@ -219,10 +208,25 @@
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
   }
   
   .overview-card {
-    display: flex;
+    // flex: 1 1 calc(20% - 15px);
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    // padding: 15px;
+    // border-radius: 8px;
+    // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    // min-width: 180px;
+    // max-width: 220px;
+    // background-color: white;
+    // // border: none;
+    // transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    flex: 1; /* Os cards crescerão proporcionalmente */
     align-items: center;
     justify-content: space-between;
     padding: 15px;
@@ -230,12 +234,12 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     min-width: 180px;
     background-color: white;
-    border: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-left: 25px;
   }
 
   .overview-card:hover {
-    transform: scale(1.00);  //Efeito de zoom ao passar o mouse 
+    transform: scale(1.02);  //Efeito de zoom ao passar o mouse 
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
   }
   
@@ -247,15 +251,16 @@
   .balance-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
     font-weight: bold;
 
     h2 {
       font-size: 1.1rem;
-      color: $text-primary;
+      color: black;
       margin: 0;
     }
   }
+
+  //---------------------------------------------------
   
   /* Cores */
   .gray {
@@ -429,105 +434,8 @@
     }
   }
 
-  // .recent-transactions {
-  //   background-color: $bg-primary;
-  //   border-radius: 10px;
-  //   padding: 20px;
-  //   box-shadow: $shadow-md;
-  //   height: 100%;
-
-  //   .section-header {
-  //     display: flex;
-  //     justify-content: space-between;
-  //     align-items: center;
-  //     margin-bottom: 20px;
-
-  //     h3 {
-  //       font-size: 1.1rem;
-  //       color: $text-primary;
-  //       margin: 0;
-  //     }
-
-  //     .view-all {
-  //       background: none;
-  //       border: none;
-  //       color: $primary;
-  //       font-size: 0.9rem;
-  //       cursor: pointer;
-  //     }
-  //   }
-
-  //   .transactions-list {
-  //     .transaction-item {
-  //       display: flex;
-  //       padding: 15px 0;
-  //       border-bottom: 1px solid $border-light;
-
-  //       &:last-child {
-  //         border-bottom: none;
-  //       }
-
-  //       .transaction-icon {
-  //         width: 40px;
-  //         height: 40px;
-  //         border-radius: 10px;
-  //         margin-right: 15px;
-
-  //         &.grocery {
-  //           background-color: $warning;
-  //         }
-
-  //         &.salary {
-  //           background-color: $income;
-  //         }
-  //       }
-
-  //       .transaction-details {
-  //         flex-grow: 1;
-
-  //         .transaction-title {
-  //           font-weight: 500;
-  //           margin-bottom: 5px;
-  //         }
-
-  //         .transaction-date {
-  //           font-size: 0.8rem;
-  //           color: $text-tertiary;
-  //         }
-  //       }
-
-  //       .transaction-amount {
-  //         font-weight: bold;
-
-  //         &.expense {
-  //           color: $expense;
-  //         }
-
-  //         &.income {
-  //           color: $income;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
   // Remove bottom navigation for desktop
   .bottom-nav {
     display: none;
   }
 }
-
-// /* Responsividade */
-// @media (max-width: 768px) {
-//   #welcome-section h1 {
-//       font-size: 1.8em;
-//   }
-
-//   nav ul {
-//       flex-direction: column;
-//   }
-
-//   nav ul li {
-//       margin: 10px 0;
-//   }
-// }

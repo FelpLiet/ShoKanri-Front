@@ -1,12 +1,61 @@
-import './Dashboard.scss';
-// import logo from "../assets/kanri-dark.svg"; Tentativa de Importação da Logo
-import { FaWallet, FaPlus, FaMinus, FaExchangeAlt, FaCreditCard } from "react-icons/fa";
+import './Dashboard.scss'
 import * as React from "react"
-import type { JSX } from "react";
-import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Pie, PieChart, Label} from "recharts"
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card" //CardFooter
+import type { JSX } from "react"
+
+import { 
+  FaWallet, 
+  FaPlus, 
+  FaMinus, 
+  FaExchangeAlt, 
+  FaCreditCard 
+} from "react-icons/fa"
+
+import { 
+  circleIcon, 
+  checkIcon, 
+  progressIcon, 
+  lineIcon, 
+  lineDottedIcon, 
+  avatarIcon 
+} from "@/assets/icons/iconsSidebar"
+
+import { 
+  Avatar, 
+  AvatarFallback, 
+  AvatarImage 
+
+} from "@/components/ui/avatar"
+
+import { 
+  ChartLegend, 
+  ChartLegendContent 
+} from "@/components/ui/chart"
+
+import { 
+  Bar, 
+  BarChart, 
+  CartesianGrid, 
+  XAxis, 
+  YAxis, 
+  Pie, 
+  PieChart, 
+  Label
+} from "recharts"
+
+import { 
+  type ChartConfig, 
+  ChartContainer, 
+  ChartTooltip, 
+  ChartTooltipContent 
+} from "@/components/ui/chart"
+
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardHeader, 
+  CardTitle 
+} from "@/components/ui/card"
 
 const chartConfig = {
   receita: {
@@ -22,7 +71,7 @@ const chartConfig = {
     color: "#07823d",
   },
   alimentacao: {
-    label: "Alimentação",
+    label: "Alimento",
     color: "#D9961A",
   },
   saude: {
@@ -81,9 +130,13 @@ const chartElement = (
       <CardTitle>Evolução das Despesas</CardTitle>
       <CardDescription>Janeiro - Junho 2025</CardDescription>
     </CardHeader>
-    <CardContent>
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-        <BarChart accessibilityLayer data={chartData}>
+    <CardContent className="p-2">
+      <ChartContainer config={chartConfig} className="w-full max-h-[200px]"> 
+        {/* "min-h-[200px] w-full" */}
+        <BarChart 
+        accessibilityLayer 
+        data={chartData}
+        margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
           <CartesianGrid vertical={false} />
           <XAxis
             dataKey="month"
@@ -104,11 +157,11 @@ const chartElement = (
 
 // Configurações Gráfico de Ranking Categorias de Despesas
 const chartDataCateg = [
-  { browser: "despesasFixas", visitors: 275, fill: "var(--color-despesasFixas)" },
-  { browser: "alimentacao", visitors: 200, fill: "var(--color-alimentacao)" },
-  { browser: "saude", visitors: 187, fill: "var(--color-saude)" },
-  { browser: "transporte", visitors: 173, fill: "var(--color-transporte)" },
-  { browser: "lazer", visitors: 90, fill: "var(--color-lazer)" },
+  { browser: "despesasFixas", Gasto: 275, fill: "var(--color-despesasFixas)" },
+  { browser: "alimentacao", Gasto: 168, fill: "var(--color-alimentacao)" },
+  { browser: "saude", Gasto: 187, fill: "var(--color-saude)" },
+  { browser: "transporte", Gasto: 173, fill: "var(--color-transporte)" },
+  { browser: "lazer", Gasto: 90, fill: "var(--color-lazer)" },
 ]
 
 export function BarChartCateg() {
@@ -118,15 +171,13 @@ export function BarChartCateg() {
         <CardTitle>Ranking - Categoria Despesas</CardTitle>
         <CardDescription>Janeiro - Junho 2025</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className="p-2">
+        <ChartContainer config={chartConfig} className="w-full max-h-[200px]">
           <BarChart
             accessibilityLayer
             data={chartDataCateg}
             layout="vertical"
-            margin={{
-              left: 50,
-            }}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
           >
             <YAxis
               dataKey="browser"
@@ -136,9 +187,9 @@ export function BarChartCateg() {
               axisLine={false}
               tickFormatter={(value) => chartConfig[value as keyof typeof chartConfig]?.label}
             />
-            <XAxis dataKey="visitors" type="number" hide />
+            <XAxis dataKey="Gasto" type="number" hide />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar dataKey="visitors" layout="vertical" radius={5} />
+            <Bar dataKey="Gasto" layout="vertical" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -168,8 +219,10 @@ function PieChartWithText({ chartDataCards, chartConfig }:
         <CardTitle>Detalhamento dos Cartões</CardTitle>
         <CardDescription>Janeiro - Junho 2025</CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
+      <CardContent className="p-2 max-w-[300px] mx-auto">
+        {/* className="flex-1 pb-0" */}
+        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[200px] w-[200px]">
+        {/* "w-full max-h-[200px]" */}
           <PieChart>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
             <Pie data={chartDataCards} dataKey="visitors" nameKey="browser" innerRadius={60} strokeWidth={5}>
@@ -203,7 +256,7 @@ const OverviewCard = ({ value, label, colorClass, icon, onClick }: {
   label: string; 
   colorClass: string; 
   icon: JSX.Element;
-  onClick?: () => void; // Adicionando a propriedade onClick
+  onClick?: () => void; 
 }) => {
   return (
     <button className={`overview-card ${colorClass}`} onClick={onClick}>
@@ -232,7 +285,7 @@ const OverviewSection = () => {
   return (
     <div className="overview-section">
       <h2>Visão Geral</h2>
-      <div className="overview-container">
+      <div className="overview-cards">
           {cards.map((card, index) => (
             <OverviewCard key={index} {...card} onClick={() => handleCardClick(card.label)} />
           ))}
@@ -254,11 +307,12 @@ const Dashboard = ({
     //Barra de Navegação / Navbar
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <h1>LOGO ShoKanri</h1>
-
-        {/* Avatar Perfil de Usuário */}
+        {/* <img src={kanriLogo} alt="ShoKanri" className="kanri-logo" /> */}
         <div className="user-profile">
-          <div className="avatar">JD</div>
+          <Avatar>
+            <AvatarImage src={avatarIcon} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </div>
       </header>
       
@@ -272,39 +326,46 @@ const Dashboard = ({
           </div>
           <div className="balance-details">
             <div className="balance-amount">
-              {/* Ícone Check */}
+              
               <div className="amount1">R$ 10,350.00</div>
+              <img src={checkIcon} alt="Saldo Inicial" className="icon check-icon" />
               <div className="label">Inicial</div>
-              {/* Ícone Circle-filled */}
+              <img src={lineIcon} alt="Line" className="icon line-icon" />
+              
               <div className="amount2">R$ 26,500.00</div>
+              <img src={circleIcon} alt="Saldo Atual" className="icon circle-icon" />
               <div className="label">Saldo Atual</div>
-              {/* Ícone Progress-check */}
+              <img src={lineDottedIcon} alt="Line Dotted" className="icon line-dotted-icon" />
+
               <div className="amount3">R$ 25,400.00</div>
+              <img src={progressIcon} alt="Saldo Previsto" className="icon progress-icon" />
               <div className="label">Previsto</div>
+
             </div>
           </div>
         </div>
 
         {/* Área de Gráfico de Evolução das Despesas */}
-        <div> 
-          {chartElement} {/* Inserindo o gráfico de Evolucao de Despesas */}
+        <div className="chart-card"> 
+          {chartElement} 
         </div>
 
         {/* Área de Gráfico de Ranking Categoria Despesas */}
-        <div>
-          <BarChartCateg /> {/* Inserindo o gráfico de Ranking Categoria de Despesas */}
+        <div className="chart-card"> 
+          <BarChartCateg /> 
         </div>
           
         {/* Área de Gráfico Detalhamento dos Cartões */}
-        <div>
-          <PieChartWithText chartDataCards={chartDataCards} chartConfig={chartConfig} /> {/* Inserindo o gráfico de Detalhamento dos Cartões */}
+        <div className="chart-card"> 
+          <PieChartWithText chartDataCards={chartDataCards} chartConfig={chartConfig} /> 
         </div>
 
       </div>
 
       {/* Área do Campo de Visão Geral */}
       <div className="balance-header">
-        <h2><OverviewSection /></h2>
+      {/* className="balance-header" */}
+        <h2><OverviewSection /></h2> 
       </div>
       
     </div>
