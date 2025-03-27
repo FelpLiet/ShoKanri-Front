@@ -6,10 +6,11 @@ import {
   UpdateUserRequest,
 } from "../types/requests";
 import { Router } from "../types/router";
+import { verifyToken } from "../middlewares/verify-token";
 
 export const register: Router = (_schema, request) => {
   const { name, email, password } = JSON.parse(
-    request.requestBody
+    request.requestBody,
   ) as RegisterUserRequest;
 
   const newUser = {
@@ -29,7 +30,7 @@ export const register: Router = (_schema, request) => {
 
 export const login: Router = (_schema, request) => {
   const { email, password } = JSON.parse(
-    request.requestBody
+    request.requestBody,
   ) as LoginUserRequest;
 
   const user = db.user.find((entity) => entity.email == email);
@@ -44,10 +45,10 @@ export const login: Router = (_schema, request) => {
 };
 
 export const remove: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
 
@@ -62,10 +63,10 @@ export const remove: Router = (_schema, request) => {
 };
 
 export const update: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
   const { name, email } = JSON.parse(request.requestBody) as UpdateUserRequest;
@@ -83,10 +84,10 @@ export const update: Router = (_schema, request) => {
 };
 
 export const getById: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
 
