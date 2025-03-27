@@ -7,7 +7,7 @@ import animationData from '@/assets/lottie/logo-no-name.json';
 import logoSvg from '@/assets/icons/kanri-no-name.svg';
 import nameSvg from '@/assets/icons/name.svg';
 import cofrinhoPath from '@/assets/icons/cofrinho.svg';
-import lupaDinheiroPath from '@/assets/icons/lupa-dinheiro.svg';
+//import lupaDinheiroPath from '@/assets/icons/lupa-dinheiro.svg';
 import usuariosPath from '@/assets/icons/usuarios.svg';
 import dinheiroPath from '@/assets/icons/dinheiro-cheque-editar.svg';
 import mockTela1 from '@/assets/telas/tela1.png';
