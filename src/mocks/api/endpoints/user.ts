@@ -13,7 +13,7 @@ export const register: Router = (_schema, request) => {
     request.requestBody,
   ) as RegisterUserRequest;
 
-  const newUser = {
+  const user = {
     id: db.user.length + 1,
     createdOn: new Date().toISOString(),
     updatedOn: new Date().toISOString(),
@@ -23,9 +23,9 @@ export const register: Router = (_schema, request) => {
     password,
   };
 
-  db.user.push(newUser);
+  db.user.push(user);
 
-  return { id: newUser.id };
+  return { id: user.id };
 };
 
 export const login: Router = (_schema, request) => {
@@ -36,7 +36,7 @@ export const login: Router = (_schema, request) => {
   const user = db.user.find((entity) => entity.email == email);
 
   if (user === undefined || user.password !== password) {
-    return { error: "credentials isn't valid!" };
+    return new Response(400, {}, { error: "credentials isn't valid!" });
   }
   return {
     userId: user.id,
@@ -55,7 +55,7 @@ export const remove: Router = (_schema, request) => {
   const index = db.user.findIndex((entity) => entity.id === id);
 
   if (index === -1) {
-    return { error: "user not found" };
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
   db.user.splice(index, 1);
 
@@ -71,14 +71,14 @@ export const update: Router = (_schema, request) => {
   const id = Number(request.params.id);
   const { name, email } = JSON.parse(request.requestBody) as UpdateUserRequest;
 
-  const index = db.user.findIndex((entity) => entity.id === id);
+  const user = db.user.find((entity) => entity.id === id);
 
-  if (index === -1) {
-    return { error: "user not found" };
+  if (!user) {
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
-  const userIndex = db.user[index];
-  userIndex.name = name ?? userIndex.name;
-  userIndex.email = email ?? userIndex.email;
+  user.name = name ?? user.name;
+  user.email = email ?? user.email;
+  user.updatedOn = new Date().toISOString();
 
   return new Response(204);
 };
@@ -94,7 +94,7 @@ export const getById: Router = (_schema, request) => {
   const user = db.user.find((entity) => entity.id === id);
 
   if (!user) {
-    return { error: "user not found" };
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
   return user;
 };
