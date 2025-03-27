@@ -7,7 +7,7 @@ import animationData from '@/assets/lottie/logo-no-name.json';
 import logoSvg from '@/assets/icons/kanri-no-name.svg';
 import nameSvg from '@/assets/icons/name.svg';
 import cofrinhoPath from '@/assets/icons/cofrinho.svg';
-//import lupaDinheiroPath from '@/assets/icons/lupa-dinheiro.svg';
+import lupaDinheiroPath from '@/assets/icons/lupa-dinheiro.svg';
 import usuariosPath from '@/assets/icons/usuarios.svg';
 import dinheiroPath from '@/assets/icons/dinheiro-cheque-editar.svg';
 import mockTela1 from '@/assets/telas/tela1.png';
@@ -41,6 +41,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       duration: 8,
       className: 'floating-mock mock2'
     },
+    { 
+      image: mockTela1, 
+      x: ['10vw', '12vw'], 
+      y: ['30vh', '35vh'], 
+      rotate: [1, -3], 
+      scale: [0.98, 1], 
+      duration: 8,
+      className: 'floating-mock mock3'
+    },
+    
   ];
 
   // Add smooth scrolling behavior
@@ -290,9 +300,32 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           <ScrollArrow targetSection="features" />
         </section>
 
-        <section id="features" className="call-to-action snap-section">
-          <h2>Ready to take control of your finances?</h2>
-          <Button onClick={onGetStarted} size="lg">Get Started</Button>
+        <section id="features" className="features snap-section">
+          <div className='features-container'>
+            <div className='features-text'>
+              <h2>Vem conhecer nossas funcionalidades</h2>
+              <p>Embarque nessa jornada junto a nos rumo a seu gerenciamento financeiro</p>
+              <Button onClick={onGetStarted} size="lg">Get Started</Button>
+            </div>
+            <div className="features-card-container">
+              <div className='features-card'>
+                <img src={lupaDinheiroPath} alt="money icon" />
+                <h3>Rastreamento de despezas</h3>
+              </div>
+              <div className='features-card'>
+                <img src={usuariosPath} alt="users icon" />
+                <h3>Lorem</h3>
+              </div>
+              <div className='features-card'>
+                <img src={cofrinhoPath} alt="piggy bank icon" />
+                <h3>Metas Financeiras</h3>
+              </div>
+              <div className='features-card'>
+                <img src={cofrinhoPath} alt="piggy bank icon" />
+                <h3>Metas Financeiras</h3>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
       

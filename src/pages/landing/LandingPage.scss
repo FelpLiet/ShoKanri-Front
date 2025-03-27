@@ -274,6 +274,7 @@
       gap: 1rem;
       height: 323px;
       width: 100%;
+      max-width: 1400px;
       .about-card {
         display: flex;
         flex-direction: column;
@@ -310,10 +311,75 @@
     }
   }
   
-  .call-to-action {
+  .features {
+    height: 100%;
     text-align: center;
     padding-top: 80px;
-    
+   
+    .features-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      
+      .features-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 572px;
+
+        h2 {
+          font-size: 3.5rem;
+          font-weight: 600;
+          margin: 0;
+          text-align: left;
+        }
+
+        p {
+          font-size: 1.2rem;
+          margin: 1rem 0;
+          text-align: left;
+        }
+      }
+
+      .features-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        
+        width: 100%;
+        max-width: 900px;
+        
+        .features-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          padding: 2rem;
+          width: 300px;
+          height: 200px;
+          background-color: white;
+          border-radius: 15px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          
+          img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+          }
+          
+          h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var($primary);
+          }
+        }
+      }
+    }
+
     h2 {
       font-size: 2.5rem;
       margin-bottom: 2rem;
@@ -441,7 +507,55 @@
           width: 100%;
           max-width: 400px;
           margin: 0 15px;
+
+          .about-text{
+            h3 {
+              font-size: 1.5rem;
+            }
+            
+            p {
+              font-size: 1rem;
+            }
+          }
         }
+      }
+    }
+
+    .features {
+      padding-top: 80px;
+      
+      .features-container {
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 2.5rem;
+          }
+          
+          p {
+            font-size: 1rem;
+          }
+        }
+        
+        .features-card-container {
+          width: 100%;
+          max-width: 1000px;
+          
+          .features-card {
+            width: 100%;
+            max-width: 300px;
+            padding: 1rem;
+            
+            h3 {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      
+      h2 {
+        font-size: 2rem;
       }
     }
   }
@@ -496,15 +610,43 @@
           }
         }
       }
-     
-      
-      
     }
     
-    .call-to-action {
+    .features {
+      .features-container {
+        flex-direction: column-reverse;
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 2rem;
+          }
+          
+          p {
+            font-size: 1rem;
+          }
+        }
+        
+        .features-card-container {
+          
+          width: 100%;
+          max-width: 1000px;
+          
+          .features-card {
+            width: 100%;
+            max-width: 300px;
+            padding: 1rem;
+            
+            h3 {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      
       h2 {
-        font-size: 2rem;
-        padding: 0 20px;
+        font-size: 1.5rem;
       }
     }
   }
@@ -544,12 +686,13 @@
       }
       .about-container {
         gap: 0.5rem;
-        height: 200px;
+        height: 250px;
         flex-wrap: wrap;
         .about-card {
           padding: 1rem;
           margin: 0 10px;
-          max-width: 200px;
+          height: 200px;
+          
           
           .about-text{
             h3 {
@@ -564,10 +707,41 @@
       }
     }
     
-    .call-to-action {
+    .features {
+      .features-container {
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 1.5rem;
+          }
+          
+          p {
+            font-size: 0.8rem;
+          }
+        }
+        
+        .features-card-container {
+          gap: 1rem;
+          .features-card {
+            width: 130px;
+            height: 100px;
+            
+            img {
+              width: 30px;
+              height: 30px;
+            }
+
+            h3 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      
       h2 {
-        font-size: 1.5rem;
-        padding: 0 10px;
+        font-size: 1.2rem;
       }
     }
   }
