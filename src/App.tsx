@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ThemeProvider } from "@/components/theme-provider"
 import './App.scss';
 
 // Import page components
@@ -12,6 +13,7 @@ import FinancialGoals from './pages/goals/FinancialGoals';
 import Settings from './pages/settings/Settings';
 import BankConnectivity from './pages/banking/BankConnectivity';
 import Sidebar from './components/Sidebar/Sidebar';
+import LandingPage from './pages/landing/LandingPage';
 
 function App() {
   enum Screen {
@@ -23,10 +25,11 @@ function App() {
     REPORTS,
     FINANCIAL_GOALS,
     SETTINGS,
-    BANK_CONNECTIVITY
+    BANK_CONNECTIVITY,
+    LANDING
   }
   
-  const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.SPLASH);
+  const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.LANDING);
 
   // Navigation handlers
   const goToOnboarding = () => setCurrentScreen(Screen.ONBOARDING);
@@ -41,11 +44,14 @@ function App() {
   // Determine if we should show the sidebar
   const showSidebar = currentScreen !== Screen.SPLASH && 
                      currentScreen !== Screen.ONBOARDING && 
-                     currentScreen !== Screen.AUTH;
+                     currentScreen !== Screen.AUTH &&
+                     currentScreen !== Screen.LANDING;
 
   // Render the current screen
   const renderScreen = () => {
     switch (currentScreen) {
+      case Screen.LANDING:
+        return <LandingPage onGetStarted={goToAuth} />;
       case Screen.SPLASH:
         return <SplashScreen onComplete={goToOnboarding} />;
       case Screen.ONBOARDING:
@@ -55,11 +61,11 @@ function App() {
       case Screen.DASHBOARD:
         return (
           <Dashboard 
-            onAddTransaction={goToAddTransaction}
+            // onAddTransaction={goToAddTransaction}
             onViewReports={goToReports}
             onViewGoals={goToFinancialGoals}
             onOpenSettings={goToSettings}
-            onConnectBank={goToBankConnectivity}
+            // onConnectBank={goToBankConnectivity}
           />
         );
       case Screen.ADD_TRANSACTION:
@@ -78,21 +84,26 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      {showSidebar && (
-        <Sidebar 
-          currentScreen={currentScreen}
-          onDashboardClick={goToDashboard}
-          onReportsClick={goToReports}
-          onGoalsClick={goToFinancialGoals}
-          onSettingsClick={goToSettings}
-          onBankClick={goToBankConnectivity}
-        />
-      )}
-      <div className="content-area">
-        {renderScreen()}
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      {/* {children} */}
+    
+      <div className="app-container">
+        {showSidebar && (
+          <Sidebar 
+            currentScreen={currentScreen}
+            onDashboardClick={goToDashboard}
+            onAddTransactionClick={goToAddTransaction} //
+            onReportsClick={goToReports}
+            onGoalsClick={goToFinancialGoals}
+            onSettingsClick={goToSettings}
+            onBankClick={goToBankConnectivity} //
+          />
+        )}
+        <div className="content-area">
+          {renderScreen()}
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

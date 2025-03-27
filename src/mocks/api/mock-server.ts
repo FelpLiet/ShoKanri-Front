@@ -1,63 +1,36 @@
 import { createServer } from "miragejs";
-import db from "./db.json" with { type: "json" };
+import { Account, Transaction, User } from "./endpoints";
 
 export default function () {
   createServer({
     routes() {
-      this.urlPrefix = "http://localhost:8080";
+      this.urlPrefix = import.meta.env.SK_API_URL;
 
-      this.get("/user/login", () => {
-        return db.userLogin;
-      });
-      this.get("/user/:id", (_schema, request) => {
-        const id = Number(request.params.id);
+      this.post("/user/register", User.register);
+      this.post("/user/login", User.login);
+      this.delete("/user/:id", User.remove);
+      this.put("/user/:id", User.update);
+      this.get("/user/:id", User.getById);
 
-        const user = db.user.find((entity) => entity.id === id);
-        return user ?? { error: "user not found!" };
-      });
+      this.post("/account/register", Account.register);
+      this.put("/account/:userId/:accountId", Account.update);
+      this.get("/account/:userId", Account.getAllByUserId);
+      this.get("/account/:userId/:accountId", Account.getByAccountId);
+      this.delete("/account/:userId/:accountId", Account.remove);
 
-      this.get("/account/:userId", (_schema, request) => {
-        const userId = Number(request.params.userId);
-
-        const accounts = db.account.filter((entity) => entity.userId === userId);
-        return accounts;
-      });
-      this.get("/account/:userId/:accountId", (_schema, request) => {
-        const userId = Number(request.params.userId);
-        const accountId = Number(request.params.accountId);
-
-        const account = db.account.find((entity) => 
-          entity.id === accountId && entity.userId === userId);
-        return account ?? { error: "account not found!" };
-      });
-
-      this.get("/transaction/:accountId", (_schema, request) => {
-        const accountId = Number(request.params.accountId);
-
-        const transactions = db.transaction.filter((entity) => entity.accountId === accountId);
-        return transactions;
-      });
-      this.get("/transaction/income/:accountId", (_schema, request) => {
-        const accountId = Number(request.params.accountId);
-
-        const transactions = db.transaction.filter((entity) => 
-          entity.accountId === accountId && entity.type === "income");
-        return transactions;
-      });
-      this.get("/transaction/expense/:accountId", (_schema, request) => {
-        const accountId = Number(request.params.accountId);
-
-        const transactions = db.transaction.filter((entity) => 
-          entity.accountId === accountId && entity.type === "expense");
-        return transactions;
-      });
-      this.get("/transaction/transference/:accountId", (_schema, request) => {
-        const accountId = Number(request.params.accountId);
-
-        const transactions = db.transaction.filter((entity) => 
-          entity.accountId === accountId && entity.type === "transference");
-        return transactions;
-      });
+      this.get("/transaction/:accountId", Transaction.getAllByAccountId);
+      this.get(
+        "/transaction/income/:accountId",
+        Transaction.getAllIncomesByAccountId,
+      );
+      this.get(
+        "/transaction/expense/:accountId",
+        Transaction.getAllExpensesByAccountId,
+      );
+      this.get(
+        "/transaction/transference/:accountId",
+        Transaction.getAllTransferencesByAccountId,
+      );
     },
   });
-};
+}

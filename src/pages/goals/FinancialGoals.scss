@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .financial-goals-container {
   display: flex;
@@ -6,7 +6,7 @@
   height: 100vh;
   background-color: $bg-secondary;
   overflow: auto;
-  
+
   .goals-header {
     display: flex;
     align-items: center;
@@ -16,7 +16,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    
+
     .back-button {
       background: none;
       border: none;
@@ -25,43 +25,46 @@
       cursor: pointer;
       margin-right: 20px;
     }
-    
+
     h1 {
-      font-size: 1.5rem;
+      flex-grow: 1;
+      text-align: center;
+      padding-right: 60px;
+      font-size: 1.3rem;
       color: $text-primary;
       margin: 0;
     }
   }
-  
+
   .goals-overview {
     background-color: $bg-primary;
     margin: 15px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: $shadow-md;
-    
+
     h2 {
       font-size: 1.2rem;
       color: $text-primary;
       margin-top: 0;
       margin-bottom: 15px;
     }
-    
+
     .overview-stats {
       display: flex;
       justify-content: space-between;
-      
+
       .stat-item {
         text-align: center;
         flex: 1;
-        
+
         .stat-value {
           font-size: 1.4rem;
           font-weight: bold;
           color: $text-primary;
           margin-bottom: 5px;
         }
-        
+
         .stat-label {
           font-size: 0.8rem;
           color: $text-tertiary;
@@ -69,189 +72,199 @@
       }
     }
   }
-  
+
   .goals-list {
     padding: 0 15px 15px;
-    
+
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 15px;
-      
+
       h2 {
         font-size: 1.2rem;
         color: $text-primary;
         margin: 0;
       }
-      
+
       .add-goal-button {
-        background-color: $primary;
+        background-color: $green-2-figma;
         color: $white;
         border: none;
         border-radius: 20px;
         padding: 8px 16px;
         font-size: 0.9rem;
         cursor: pointer;
-        
+
         &:hover {
-          background-color: $primary-light;
+          background-color: $green-figma;
         }
       }
     }
-    
+
     .new-goal-form {
       background-color: $bg-primary;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 20px;
       box-shadow: $shadow-md;
-      
+
       h3 {
         font-size: 1.1rem;
         color: $text-primary;
         margin-top: 0;
         margin-bottom: 15px;
       }
-      
+
       .form-group {
         margin-bottom: 15px;
-        
+
         label {
           display: block;
           margin-bottom: 5px;
           color: $text-secondary;
           font-size: 0.9rem;
         }
-        
-        input, select {
+
+        input,
+        select {
           width: 100%;
           padding: 10px;
           border: 1px solid $border-light;
           border-radius: 5px;
           font-size: 0.95rem;
-          
+
           &:focus {
             border-color: $primary;
             outline: none;
           }
         }
       }
-      
+
       .form-actions {
         display: flex;
         justify-content: flex-end;
         margin-top: 20px;
-        
+
         button {
           padding: 10px 20px;
           border-radius: 5px;
           font-size: 0.95rem;
           cursor: pointer;
         }
-        
+
         .cancel-button {
           background: none;
           border: 1px solid $border-light;
           color: $text-tertiary;
           margin-right: 10px;
+
+          &:hover {
+            background-color: $white-3-figma;
+            color: $gray-50-figma;
+          }
         }
-        
+
         .save-button {
-          background-color: $primary;
+          background-color: $green-2-figma;
           color: $white;
           border: none;
+
+          &:hover {
+            background-color: $green-figma;
+          }
         }
       }
     }
-    
+
     .goal-card {
       background-color: $bg-primary;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 15px;
       box-shadow: $shadow-md;
-      
+
       .goal-header {
         display: flex;
         align-items: center;
         margin-bottom: 15px;
-        
+
         .goal-icon {
           width: 40px;
           height: 40px;
           border-radius: 10px;
           margin-right: 15px;
-          
-          &.savings {
-            background-color: $primary;
+
+          &.poupança {
+            background-color: $info;
           }
-          
-          &.travel {
+
+          &.viagem {
             background-color: $warning;
           }
-          
-          &.electronics {
+
+          &.electrônico {
             background-color: $error;
           }
         }
-        
+
         .goal-title {
           flex-grow: 1;
           font-weight: bold;
           font-size: 1.1rem;
           color: $text-primary;
         }
-        
+
         .goal-menu {
           color: $text-tertiary;
           font-size: 1.2rem;
           cursor: pointer;
         }
       }
-      
+
       .goal-amounts {
         margin-bottom: 10px;
-        
+
         .saved-amount {
           margin-bottom: 5px;
-          
+
           .amount-value {
             color: $text-primary;
             font-weight: 500;
           }
-          
+
           .amount-label {
             color: $text-tertiary;
           }
         }
-        
+
         .deadline {
           font-size: 0.85rem;
           color: $text-tertiary;
         }
       }
-      
+
       .progress-container {
         height: 8px;
         background-color: $bg-tertiary;
         border-radius: 4px;
         margin-bottom: 5px;
         overflow: hidden;
-        
+
         .progress-bar {
           height: 100%;
           background-color: $primary;
         }
       }
-      
+
       .progress-percentage {
         text-align: right;
         font-size: 0.85rem;
         color: $text-tertiary;
         margin-bottom: 15px;
       }
-      
+
       .add-funds-button {
         width: 100%;
         padding: 10px;
@@ -261,7 +274,7 @@
         border-radius: 5px;
         font-size: 0.95rem;
         cursor: pointer;
-        
+
         &:hover {
           background-color: rgba($primary, 0.05);
         }

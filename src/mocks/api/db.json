@@ -1,8 +1,5 @@
 {
-  "userLogin": {
-    "userId": 1,
-    "authToken": "lflahfisjflsdlfa"
-  },
+  "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
   "user": [
     {
       "id": 1,
@@ -10,7 +7,8 @@
       "updatedOn": "2025-03-19",
       "name": "John Doe",
       "email": "john.doe@gmail.com",
-      "active": true
+      "active": true,
+      "password": ""
     },
     {
       "id": 2,
@@ -18,7 +16,8 @@
       "updatedOn": "2025-03-20",
       "name": "Mary Doe",
       "email": "mary.doe@gmail.com",
-      "active": false
+      "active": false,
+      "password": ""
     }
   ],
   "account": [
@@ -27,6 +26,7 @@
       "createdOn": "2025-03-19",
       "updatedOn": "2025-03-19",
       "userId": 1,
+      "ignoreInOverview": false,
       "name": "Goals",
       "description": "Lorem ipsum",
       "balance": 250.25,
@@ -36,7 +36,8 @@
       "id": 2,
       "createdOn": "2025-03-20",
       "updatedOn": "2025-03-20",
-      "userId": 2,
+      "userId": 3,
+      "ignoreInOverview": false,
       "name": "Goals",
       "description": "Lorem ipsum",
       "balance": 250.25,
@@ -46,7 +47,8 @@
       "id": 3,
       "createdOn": "2025-03-20",
       "updatedOn": "2025-03-20",
-      "userId": 1,
+      "userId": 3,
+      "ignoreInOverview": false,
       "name": "Real Estate",
       "description": "Lorem ipsum",
       "balance": 250.25,
@@ -57,6 +59,7 @@
       "createdOn": "2025-03-21",
       "updatedOn": "2025-03-21",
       "userId": 1,
+      "ignoreInOverview": false,
       "name": "Stocks",
       "description": "Lorem ipsum",
       "balance": 250.25,
@@ -66,7 +69,8 @@
       "id": 5,
       "createdOn": "2025-03-21",
       "updatedOn": "2025-03-21",
-      "userId": 2,
+      "userId": 3,
+      "ignoreInOverview": true,
       "name": "Emergency Reserve",
       "description": "Lorem ipsum",
       "balance": 250.25,

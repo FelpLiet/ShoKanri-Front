@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './FinancialGoals.scss';
+import { useState } from "react";
+import "./FinancialGoals.scss";
 
 interface FinancialGoalsProps {
   onBack: () => void;
@@ -7,32 +7,32 @@ interface FinancialGoalsProps {
 
 const FinancialGoals = ({ onBack }: FinancialGoalsProps) => {
   const [showNewGoalForm, setShowNewGoalForm] = useState(false);
-  
+
   const goals = [
     {
       id: 1,
-      name: "Emergency Fund",
+      name: "Emergências",
       targetAmount: 10000,
       currentAmount: 6500,
-      deadline: "December 2023",
-      category: "savings"
+      deadline: "Dezembro de 2025",
+      category: "poupança",
     },
     {
       id: 2,
-      name: "New Laptop",
+      name: "Notebook novo",
       targetAmount: 5000,
       currentAmount: 2000,
-      deadline: "March 2024",
-      category: "electronics"
+      deadline: "Abril de 2025",
+      category: "electrônico",
     },
     {
       id: 3,
-      name: "Vacation",
+      name: "Férias",
       targetAmount: 7000,
       currentAmount: 1500,
-      deadline: "July 2024",
-      category: "travel"
-    }
+      deadline: "Julho de 2025",
+      category: "viagem",
+    },
   ];
 
   const toggleNewGoalForm = () => {
@@ -42,77 +42,83 @@ const FinancialGoals = ({ onBack }: FinancialGoalsProps) => {
   return (
     <div className="financial-goals-container">
       <header className="goals-header">
-        <button className="back-button" onClick={onBack}>Back</button>
-        <h1>Financial Goals</h1>
+        <button className="back-button" onClick={onBack}>
+          Voltar
+        </button>
+        <h1>Metas Financeiras</h1>
       </header>
 
       <div className="goals-overview">
-        <h2>Progress Overview</h2>
+        <h2>Visão geral do progresso</h2>
         <div className="overview-stats">
           <div className="stat-item">
             <div className="stat-value">3</div>
-            <div className="stat-label">Active Goals</div>
+            <div className="stat-label">Metas ativas</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">R$ 10,000</div>
-            <div className="stat-label">Total Saved</div>
+            <div className="stat-value">R$ 10.000</div>
+            <div className="stat-label">Total economizado</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">R$ 12,000</div>
-            <div className="stat-label">Remaining</div>
+            <div className="stat-value">R$ 12.000</div>
+            <div className="stat-label">Outros valores</div>
           </div>
         </div>
       </div>
 
       <div className="goals-list">
         <div className="section-header">
-          <h2>Your Goals</h2>
+          <h2>Suas Metas</h2>
           <button className="add-goal-button" onClick={toggleNewGoalForm}>
-            + New Goal
+            + Nova Meta
           </button>
         </div>
-        
+
         {showNewGoalForm && (
           <div className="new-goal-form">
-            <h3>Create New Goal</h3>
+            <h3>Criar nova meta</h3>
             <div className="form-group">
-              <label>Goal Name</label>
-              <input type="text" placeholder="e.g. New Car" />
+              <label>Nome da meta</label>
+              <input type="text" placeholder="Por exemplo: Carro novo" />
             </div>
-            
+
             <div className="form-group">
-              <label>Target Amount</label>
+              <label>Valor previsto</label>
               <input type="number" placeholder="R$ 0.00" />
             </div>
-            
+
             <div className="form-group">
-              <label>Target Date</label>
+              <label>Data prevista</label>
               <input type="date" />
             </div>
-            
+
             <div className="form-group">
-              <label>Category</label>
+              <label>Categoria</label>
               <select>
-                <option value="">Select Category</option>
-                <option value="savings">Savings</option>
-                <option value="travel">Travel</option>
-                <option value="electronics">Electronics</option>
-                <option value="vehicle">Vehicle</option>
-                <option value="home">Home</option>
-                <option value="education">Education</option>
+                <option value="">Selecione a Categoria</option>
+                <option value="savings">Poupança</option>
+                <option value="travel">Viagem</option>
+                <option value="electronics">Eletrônico</option>
+                <option value="vehicle">Veículo</option>
+                <option value="home">Casa</option>
+                <option value="education">Educação</option>
               </select>
             </div>
-            
+
             <div className="form-actions">
-              <button className="cancel-button" onClick={toggleNewGoalForm}>Cancel</button>
-              <button className="save-button">Create Goal</button>
+              <button className="cancel-button" onClick={toggleNewGoalForm}>
+                Cancelar
+              </button>
+              <button className="save-button">Criar Meta</button>
             </div>
           </div>
         )}
-        
-        {goals.map(goal => {
-          const progressPercent = Math.round((goal.currentAmount / goal.targetAmount) * 100);
-          
+
+        {goals.map((goal) => {
+          const progressPercent = Math.round(
+            (goal.currentAmount / goal.targetAmount) * 100
+          );
+
           return (
             <div key={goal.id} className="goal-card">
               <div className="goal-header">
@@ -120,22 +126,29 @@ const FinancialGoals = ({ onBack }: FinancialGoalsProps) => {
                 <div className="goal-title">{goal.name}</div>
                 <div className="goal-menu">⋮</div>
               </div>
-              
+
               <div className="goal-amounts">
                 <div className="saved-amount">
-                  <span className="amount-value">R$ {goal.currentAmount.toLocaleString()}</span>
-                  <span className="amount-label"> saved of </span>
-                  <span className="amount-value">R$ {goal.targetAmount.toLocaleString()}</span>
+                  <span className="amount-value">
+                    R$ {goal.currentAmount.toLocaleString()}
+                  </span>
+                  <span className="amount-label"> salvo de </span>
+                  <span className="amount-value">
+                    R$ {goal.targetAmount.toLocaleString()}
+                  </span>
                 </div>
-                <div className="deadline">Target: {goal.deadline}</div>
+                <div className="deadline">Objetivo: {goal.deadline}</div>
               </div>
-              
+
               <div className="progress-container">
-                <div className="progress-bar" style={{ width: `${progressPercent}%` }}></div>
+                <div
+                  className="progress-bar"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
               </div>
               <div className="progress-percentage">{progressPercent}%</div>
-              
-              <button className="add-funds-button">Add Funds</button>
+
+              <button className="add-funds-button">Adicionar fundos</button>
             </div>
           );
         })}
