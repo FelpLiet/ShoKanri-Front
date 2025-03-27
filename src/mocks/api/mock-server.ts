@@ -12,21 +12,24 @@ export default function () {
       this.put("/user/:id", User.update);
       this.get("/user/:id", User.getById);
 
+      this.post("/account/register", Account.register);
+      this.put("/account/:userId/:accountId", Account.update);
       this.get("/account/:userId", Account.getAllByUserId);
       this.get("/account/:userId/:accountId", Account.getByAccountId);
+      this.delete("/account/:userId/:accountId", Account.remove);
 
       this.get("/transaction/:accountId", Transaction.getAllByAccountId);
       this.get(
         "/transaction/income/:accountId",
-        Transaction.getAllIncomesByAccountId
+        Transaction.getAllIncomesByAccountId,
       );
       this.get(
         "/transaction/expense/:accountId",
-        Transaction.getAllExpensesByAccountId
+        Transaction.getAllExpensesByAccountId,
       );
       this.get(
         "/transaction/transference/:accountId",
-        Transaction.getAllTransferencesByAccountId
+        Transaction.getAllTransferencesByAccountId,
       );
     },
   });
