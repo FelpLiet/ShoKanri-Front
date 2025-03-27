@@ -1,0 +1,926 @@
+@use '../../styles/variables' as *;
+
+.landing-page {
+  height: 100vh;
+  
+  // Hide scrollbar but keep functionality
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+.floating-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  perspective: 1000px;
+  
+  .floating-element {
+    position: absolute;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation: float3d 8s ease-in-out infinite alternate;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    &.mock1 {
+      width: 35%;
+      max-width: 500px;
+      top: 20%;
+      right: 10%;
+      transform: rotateY(-15deg) rotateX(5deg) translateZ(20px);
+      animation-delay: 0s;
+      
+      @media (max-width: 768px) {
+        width: 40%;
+        right: 5%;
+      }
+    }
+    
+    &.mock2 {
+      width: 30%;
+      max-width: 500px;
+      top: 45%;
+      left: 15%;
+      transform: rotateY(15deg) rotateX(5deg) translateZ(20px);
+      animation-delay: 1s;
+      
+      @media (max-width: 768px) {
+        width: 35%;
+        left: 10%;
+      }
+    }
+    
+    &.mock3 {
+      width: 28%;
+      max-width: 500px;
+      bottom: 15%;
+      right: 20%;
+      animation-delay: 2s;
+      
+      @media (max-width: 768px) {
+        width: 32%;
+        right: 15%;
+      }
+    }
+  }
+  
+  .blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(-1deg) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotate(2deg) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotate(0deg) scale(0.99);
+  }
+}
+
+@keyframes float3d {
+  0% {
+    transform: translateY(0px) rotateY(-15deg) rotateX(5deg) translateZ(20px) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotateY(-12deg) rotateX(3deg) translateZ(30px) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotateY(-18deg) rotateX(8deg) translateZ(15px) scale(0.99);
+  }
+}
+
+@keyframes float3dReverse {
+  0% {
+    transform: translateY(0px) rotateY(15deg) rotateX(5deg) translateZ(20px) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotateY(12deg) rotateX(3deg) translateZ(30px) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotateY(18deg) rotateX(8deg) translateZ(15px) scale(0.99);
+  }
+}
+
+.floating-element {
+  &.mock1 {
+    animation: float3d 8s ease-in-out infinite alternate;
+  }
+  
+  &.mock2 {
+    animation: float3dReverse 8s ease-in-out infinite alternate;
+  }
+}
+
+// Fix landing header and options positioning
+.landing-header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 48px;
+  background-color: rgba(247, 247, 247, 0.216);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.099);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  
+  .logo {
+    display: flex;
+    max-height: 30px;
+    gap: 15px;
+  }
+  
+  // Fix desktop nav positioning
+  .options.desktop-nav {
+    display: flex;
+    gap: 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 10px;
+    
+    a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
+      padding: 5px 0;
+      position: relative;
+      
+      &:hover {
+        color: #000000; 
+      }
+      
+      &.active {
+        color: #000000;
+      }
+    }
+    
+    .nav-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      background: #000000; 
+      border-radius: 3px;
+      transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.landing-content {
+
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding-top: 80px;
+    
+    .hero-animation{
+      height: 200px;
+    }
+
+    h1 {
+      color: var($primary);
+      font-size: 8rem;
+      letter-spacing: 15px;
+      margin: 0rem 0;
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-weight: 600;
+    }
+  }
+  
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    height: 100%;
+    padding-top: 80px;
+
+    .about-logo{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+      max-width: 400px;
+      
+      .about-animation{
+        height: 100px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .about-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      gap: 1rem;
+      height: 323px;
+      width: 100%;
+      max-width: 1400px;
+      .about-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        border-radius: 15px;
+        padding: 32px;
+        gap: 14px;
+        width: 100%;
+        max-width: 418px;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      
+        .about-text{
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          h3 {
+            margin-top: 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: var($primary);
+          }
+          
+          p {
+            font-weight: 500;
+            font-size: 18px;
+            text-align: justify;
+
+          }
+        }
+      }
+    }
+  }
+  
+  .features {
+    height: 100%;
+    text-align: center;
+    padding-top: 80px;
+   
+    .features-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      
+      .features-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 572px;
+
+        h2 {
+          font-size: 3.5rem;
+          font-weight: 600;
+          margin: 0;
+          text-align: left;
+        }
+
+        p {
+          font-size: 1.2rem;
+          margin: 1rem 0;
+          text-align: left;
+        }
+      }
+
+      .features-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        
+        width: 100%;
+        max-width: 900px;
+        
+        .features-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          padding: 2rem;
+          width: 300px;
+          height: 200px;
+          background-color: white;
+          border-radius: 15px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          
+          img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+          }
+          
+          h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var($primary);
+          }
+        }
+      }
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.landing-footer {
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-height: 600px) {
+  .floating-element {
+    &.mock1, &.mock2, &.mock3 {
+      transform: scale(0.8);
+    }
+  }
+}
+
+// Replace snap-scroll-container with smooth-scroll-container
+.smooth-scroll-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  // Hide scrollbar but maintain functionality
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Add scroll timeline for smoother animations
+  @supports (scroll-timeline: works) {
+    scroll-timeline: --page-scroll block;
+  }
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  position: relative;
+  
+  // Improve scroll snap stopping
+  scroll-snap-stop: always;
+  
+  // Add padding at the bottom to make room for scroll arrows
+  padding-bottom: 70px;
+}
+
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%) translateY(-5px);
+  }
+  
+  // Make arrow more visible on light backgrounds
+  .about &, .call-to-action & {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-20px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+}
+
+// Comprehensive responsive styles for mobile
+@media (max-width: 1024px) {
+  .landing-content {
+    .hero {
+      .hero-animation{
+        height: 150px;
+      }
+
+      h1 {
+        font-size: 6rem;
+        letter-spacing: 10px;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+    
+    .about {
+      padding-top: 80px;
+      gap: 2rem;
+      
+      .about-container {
+        gap: 1rem;
+        height: 400px;
+        
+        .about-card {
+          width: 100%;
+          max-width: 400px;
+          margin: 0 15px;
+
+          .about-text{
+            h3 {
+              font-size: 1.5rem;
+            }
+            
+            p {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+
+    .features {
+      padding-top: 80px;
+      
+      .features-container {
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 2.5rem;
+          }
+          
+          p {
+            font-size: 1rem;
+          }
+        }
+        
+        .features-card-container {
+          width: 100%;
+          max-width: 1000px;
+          
+          .features-card {
+            width: 100%;
+            max-width: 300px;
+            padding: 1rem;
+            
+            h3 {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 15px 20px;
+    
+    .options {
+      gap: 1.5rem;
+    }
+  }
+  
+  .landing-content {
+    .hero {
+      h1 {
+        font-size: 4.5rem;
+        letter-spacing: 8px;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        padding: 0 20px;
+      }
+    }
+    
+    .about {
+      justify-content: flex-start;
+      gap: 0;
+      .about-logo{
+        gap: 0.5rem;
+        max-width: 300px;
+      }
+      .about-container {
+        gap: 0.5rem;
+        height: 250px;
+        flex-wrap: wrap;
+        .about-card {
+          padding: 1rem;
+          margin: 0 10px;
+          max-width: 300px;
+          
+          .about-text{
+            h3 {
+              font-size: 1.2rem;
+            }
+            
+            p {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+    
+    .features {
+      .features-container {
+        flex-direction: column-reverse;
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 2rem;
+          }
+          
+          p {
+            font-size: 1rem;
+          }
+        }
+        
+        .features-card-container {
+          
+          width: 100%;
+          max-width: 1000px;
+          
+          .features-card {
+            width: 100%;
+            max-width: 300px;
+            padding: 1rem;
+            
+            h3 {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Mobile-specific styles
+@media (max-width: 480px) {
+  .landing-header {
+    padding: 15px 10px;
+    
+    .options {
+      gap: 1rem;
+      
+      a {
+        font-size: 14px;
+      }
+    }
+  }
+  
+  .landing-content {
+    .hero {
+      h1 {
+        font-size: 3.5rem;
+        letter-spacing: 6px;
+      }
+      
+      p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+    }
+    
+    .about {
+      .about-logo{
+        gap: 0.5rem;
+        max-width: 200px;
+      }
+      .about-container {
+        gap: 0.5rem;
+        height: 250px;
+        flex-wrap: wrap;
+        .about-card {
+          padding: 1rem;
+          margin: 0 10px;
+          height: 200px;
+          
+          
+          .about-text{
+            h3 {
+              font-size: 1rem;
+            }
+            
+            p {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+    
+    .features {
+      .features-container {
+        .features-text {
+          width: 100%;
+          max-width: 572px;
+          
+          h2 {
+            font-size: 1.5rem;
+          }
+          
+          p {
+            font-size: 0.8rem;
+          }
+        }
+        
+        .features-card-container {
+          gap: 1rem;
+          .features-card {
+            width: 130px;
+            height: 100px;
+            
+            img {
+              width: 30px;
+              height: 30px;
+            }
+
+            h3 {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+      
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  
+  .landing-footer {
+    padding: 1rem;
+  }
+}
+
+// Add touch-specific improvements
+@media (pointer: coarse) {
+  .scroll-down-arrow {
+    padding: 12px; // Larger tap target for touch devices
+  }
+  
+  .landing-header {
+    .options a {
+      padding: 8px 5px; // Larger tap target for navigation
+    }
+  }
+  
+  button {
+    min-height: 44px; // Minimum height for touch targets
+  }
+}
+
+// Portrait mode on phones
+@media (max-width: 480px) and (orientation: portrait) {
+  .floating-background {
+    .blur-overlay {
+      background-color: rgba(255, 255, 255, 0.8); // More opacity for better readability
+    }
+  }
+  
+  // Fix issues with very small screens
+  @media (max-height: 600px) {
+    .landing-content {
+      .hero {
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero-description {
+          p {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Fundo escuro semitransparente
+  z-index: 95; // Acima de quase tudo, mas abaixo do menu
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.hamburger-menu {
+  display: none;
+  position: relative;
+  z-index: 101; // Higher than header z-index
+  
+  #menu__toggle {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+  }
+  
+  #menu__toggle:checked + .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  
+  #menu__toggle:checked + .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  
+  #menu__toggle:checked + .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  
+  #menu__toggle:checked ~ .menu__box {
+    right: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .menu__btn {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 102; // Above everything
+  }
+  
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    transition-duration: .25s;
+  }
+  
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+  
+  .menu__box {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    gap: 10px;
+    margin: 0;
+    border-radius: 15px;
+    padding: 80px 0 30px;
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 6px rgba(0, 0, 0, .2);
+    transition: right 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 101;
+    overflow-y: auto;
+    
+    .menu__item {
+      text-align: center;
+      margin: 20px;
+      font-size: 1.4rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      
+      button {
+        margin-left: 20px;
+      }
+    }
+  }
+  
+}
+
+// Responsive adjustments for the navigation - improve mobile breakpoint handling
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: block;
+  }
+  
+  .desktop-nav, .desktop-login {
+    display: none !important; // Ensure these are hidden
+  }
+  
+  .landing-header {
+    justify-content: space-between;
+    padding: 15px 20px;
+    
+    .options {
+      display: none !important; // Force hide all desktop options
+    }
+  }
+}

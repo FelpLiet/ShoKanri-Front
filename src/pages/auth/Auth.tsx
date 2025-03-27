@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUser } from "react-icons/fa6";
 import "./Auth.scss";
-import logo from "../../assets/kanri-dark.svg";
+import logo from "../../assets/icons/kanri-dark.svg";
 
 interface AuthProps {
   onLogin: () => void;
