@@ -8,13 +8,13 @@ interface ReportsProps {
 const Reports = ({ onBack }: ReportsProps) => {
   const [selectedPeriod, setSelectedPeriod] = useState('month');
 
-  const periods = ['week', 'month', 'quarter', 'year'];
+  const periods = ['Semana', 'Mês', 'Trimestre', 'Ano'];
 
   return (
     <div className="reports-container">
       <header className="reports-header">
-        <button className="back-button" onClick={onBack}>Back</button>
-        <h1>Reports</h1>
+        <button className="back-button" onClick={onBack}>Voltar</button>
+        <h1>Relatórios</h1>
       </header>
 
       <div className="period-selector">
@@ -30,40 +30,40 @@ const Reports = ({ onBack }: ReportsProps) => {
       </div>
 
       <div className="main-chart">
-        <h2>Spending Overview</h2>
+        <h2>Visão geral dos gastos</h2>
         <div className="chart-placeholder">
-          <div className="placeholder-text">Spending over time chart</div>
+          <div className="placeholder-text">Gráfico de gastos ao longo do tempo</div>
         </div>
       </div>
 
       <div className="category-breakdown">
-        <h2>Spending by Category</h2>
+        <h2>Gastos por categoria</h2>
         <div className="pie-chart-placeholder">
-          <div className="placeholder-text">Category pie chart</div>
+          <div className="placeholder-text">Gráfico de pizza de categoria</div>
         </div>
 
         <div className="category-list">
           <div className="category-item">
             <div className="category-color food"></div>
-            <div className="category-name">Food & Dining</div>
+            <div className="category-name">Comida</div>
             <div className="category-amount">R$ 850.00</div>
             <div className="category-percentage">35%</div>
           </div>
           <div className="category-item">
             <div className="category-color transport"></div>
-            <div className="category-name">Transportation</div>
+            <div className="category-name">Transporte</div>
             <div className="category-amount">R$ 450.00</div>
             <div className="category-percentage">20%</div>
           </div>
           <div className="category-item">
             <div className="category-color housing"></div>
-            <div className="category-name">Housing</div>
+            <div className="category-name">Moradia</div>
             <div className="category-amount">R$ 600.00</div>
             <div className="category-percentage">25%</div>
           </div>
           <div className="category-item">
             <div className="category-color entertainment"></div>
-            <div className="category-name">Entertainment</div>
+            <div className="category-name">Entretenimento</div>
             <div className="category-amount">R$ 360.00</div>
             <div className="category-percentage">15%</div>
           </div>
@@ -71,19 +71,19 @@ const Reports = ({ onBack }: ReportsProps) => {
       </div>
 
       <div className="insights-section">
-        <h2>Insights</h2>
+        <h2>Percepções</h2>
         <div className="insight-card">
           <div className="insight-icon"></div>
           <div className="insight-content">
-            <h3>Spending Increase</h3>
-            <p>Your food expenses increased by 15% compared to last month.</p>
+            <h3>Aumento de gastos</h3>
+            <p>Suas despesas com alimentação aumentaram 15% em relação ao mês passado.</p>
           </div>
         </div>
         <div className="insight-card">
           <div className="insight-icon"></div>
           <div className="insight-content">
-            <h3>Savings Opportunity</h3>
-            <p>You could save up to R$ 200 by reducing your entertainment expenses.</p>
+            <h3>Oportunidade de economia</h3>
+            <p>Você pode economizar até R$ 200.00 reduzindo suas despesas com entretenimento.</p>
           </div>
         </div>
       </div>
