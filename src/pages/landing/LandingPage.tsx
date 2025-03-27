@@ -3,10 +3,14 @@ import './LandingPage.scss';
 import { Button } from '@/components/ui/button';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { motion, useScroll, useTransform } from 'framer-motion';
+
 import animationData from '@/assets/lottie/logo-no-name.json';
 import logoSvg from '@/assets/icons/kanri-no-name.svg';
 import nameSvg from '@/assets/icons/name.svg';
-
+import cofrinhoPath from '@/assets/icons/cofrinho.svg';
+import lupaDinheiroPath from '@/assets/icons/lupa-dinheiro.svg';
+import usuariosPath from '@/assets/icons/usuarios.svg';
+import dinheiroPath from '@/assets/icons/dinheiro-cheque-editar.svg';
 import mockTela1 from '@/assets/telas/tela1.png';
 import mockTela2 from '@/assets/telas/tela2.png';
 
@@ -29,8 +33,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const heroDescriptionOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   
   // Transform values for the about section to fade in
-  const aboutOpacity = useTransform(scrollY, [400, 600], [0, 1]);
-  const aboutY = useTransform(scrollY, [200, 400], [10, 500]);
+  const aboutOpacity = useTransform(scrollY, [700, 1000], [1, 0]);
+  const aboutY = useTransform(scrollY, [200, 0], [10, 100]);
   
   // Transform values for the CTA section
   const ctaOpacity = useTransform(scrollY, [500, 700], [0, 1]);
@@ -130,14 +134,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             y: aboutY
           }}>
           <div className="about-card">
+            <img src={dinheiroPath} alt="" />
             <h3>O que é?</h3>
             <p>Nosso gerenciador financeiro é uma plataforma completa para organizar, monitorar e planejar suas finanças, reunindo todas as contas e transações em um único lugar.</p>
           </div>
           <div className="about-card">
+            <img src={usuariosPath} alt="" />
             <h3>Para quem é?</h3>
             <p>Desenvolvido para profissionais autônomos, pequenas empresas e famílias que buscam controle e transparência em suas finanças.</p>
           </div>
           <div className="about-card">
+            <img src={cofrinhoPath} alt="" />
             <h3>Solução?</h3>
             <p>Ele ajuda a eliminar a confusão na gestão financeira, facilitando o acompanhamento dos gastos, o planejamento de orçamentos e a análise de desempenho financeiro</p>
           </div>

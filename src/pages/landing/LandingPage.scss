@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
 .landing-page {
-  height: auto;
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -130,7 +130,7 @@
 
   
 .landing-content {
-  
+  height: 5000px;
   overflow: visible;
 
   section {
@@ -140,7 +140,7 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    margin-bottom: 100px; // Add spacing between sections
+    margin-bottom: 100px;
   }
   
   .hero {
@@ -175,11 +175,11 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    gap: 2rem;
-    position: relative;
+    gap: 1rem;
+    position: fixed;
     
     .about-card {
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: white;
       border-radius: 12px;
       padding: 2rem;
       width: 300px;
@@ -199,7 +199,7 @@
   
   .call-to-action {
     text-align: center;
-    position: relative;
+    position: static;
     
     h2 {
       font-size: 2.5rem;
