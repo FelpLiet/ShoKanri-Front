@@ -80,7 +80,7 @@ const Reports = ({ onBack }: ReportsProps) => {
           </div>
         </div>
         <div className="insight-card">
-          <div className="insight-icon"></div>
+          <div className="insight-icon2"></div>
           <div className="insight-content">
             <h3>Oportunidade de economia</h3>
             <p>Você pode economizar até R$ 200.00 reduzindo suas despesas com entretenimento.</p>

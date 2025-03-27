@@ -12,6 +12,10 @@
     padding: 20px;
     background-color: $bg-primary;
     box-shadow: $shadow-sm;
+    margin-bottom: 11px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 
     .back-button {
       background: none;
@@ -32,14 +36,15 @@
     border-radius: 10px;
     box-shadow: $shadow-md;
     background-color: $bg-primary;
-    
 
     max-width: 800px;
-    margin: 0 auto;
+    margin: auto;
 
     width: 100%;
-    padding: 40px;
+    padding: 25px;
+    padding-bottom: 20px;
     border-radius: 10px;
+    margin-bottom: 100px;
 
     .transaction-type {
       display: flex;
@@ -65,13 +70,21 @@
         }
 
         &.expense.active {
-          background-color: $expense;
+          background-color: $primary-light;
           color: $white;
+
+          &:hover {
+            background-color: $primary-dark;
+          }
         }
 
-        &.income.active {
-          background-color: $income;
+        &.income {
+          background-color: $secondary-light;
           color: $white;
+
+          &:hover {
+            background-color: $gray-50-figma;
+          }
         }
       }
     }

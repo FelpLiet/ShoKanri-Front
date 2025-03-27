@@ -74,6 +74,7 @@ const Auth = ({ onLogin }: AuthProps) => {
             <label htmlFor="password">Senha</label>
             <div className="input-wrapper">
               <input
+                minLength={8}
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
