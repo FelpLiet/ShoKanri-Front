@@ -1,8 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import './LandingPage.scss';
 import { Button } from '@/components/ui/button';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { motion, useScroll, useTransform } from 'framer-motion';
 
 import animationData from '@/assets/lottie/logo-no-name.json';
 import logoSvg from '@/assets/icons/kanri-no-name.svg';
@@ -20,27 +19,9 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState('hero');
+  const indicatorRef = useRef<HTMLDivElement>(null);
 
-  const { scrollY } = useScroll({
-    container: ref,
-        
-  });
-
-  // Create opacity and movement transforms based on scroll position
-  const heroOpacity = useTransform(scrollY, [700, 1000], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 500], [1, 0.8]);
-  const heroY = useTransform(scrollY, [0, 500], [0, -400]);
-  const heroDescriptionOpacity = useTransform(scrollY, [0, 200], [1, 0]);
-  
-  // Transform values for the about section to fade in
-  const aboutOpacity = useTransform(scrollY, [700, 1000], [1, 0]);
-  const aboutY = useTransform(scrollY, [200, 0], [10, 100]);
-  
-  // Transform values for the CTA section
-  const ctaOpacity = useTransform(scrollY, [500, 700], [0, 1]);
-  const ctaScale = useTransform(scrollY, [500, 700], [0.9, 1]);
-
-  
   const floatingElements = [
     { 
       image: mockTela1, 
@@ -62,53 +43,202 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     },
   ];
 
+  // Add smooth scrolling behavior
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      
+      const delta = e.deltaY;
+      const currentScrollTop = container.scrollTop;
+      const windowHeight = window.innerHeight;
+      
+      // Calculate the current section index
+      const currentSectionIndex = Math.round(currentScrollTop / windowHeight);
+      
+      // Determine which section to scroll to
+      let targetSectionIndex;
+      if (delta > 0) {
+        // Scrolling down
+        targetSectionIndex = currentSectionIndex + 1;
+      } else {
+        // Scrolling up
+        targetSectionIndex = currentSectionIndex - 1;
+      }
+      
+      // Ensure target section is within bounds
+      const sections = container.querySelectorAll('.snap-section');
+      targetSectionIndex = Math.max(0, Math.min(targetSectionIndex, sections.length - 1));
+      
+      // Smooth scroll to target section
+      const targetScrollTop = targetSectionIndex * windowHeight;
+      
+      container.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
+  // Add touch event handling for mobile devices
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+    
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      // Prevent default to avoid browser's native scroll
+      e.preventDefault();
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndY = e.changedTouches[0].clientY;
+      
+      const swipeDistance = touchStartY - touchEndY;
+      if (Math.abs(swipeDistance) < 50) return; // Ignore small swipes
+      
+      const currentScrollTop = container.scrollTop;
+      const windowHeight = window.innerHeight;
+      const currentSectionIndex = Math.round(currentScrollTop / windowHeight);
+      
+      let targetSectionIndex;
+      if (swipeDistance > 0) {
+        // Swipe up - go down
+        targetSectionIndex = currentSectionIndex + 1;
+      } else {
+        // Swipe down - go up
+        targetSectionIndex = currentSectionIndex - 1;
+      }
+      
+      // Ensure target section is within bounds
+      const sections = container.querySelectorAll('.snap-section');
+      targetSectionIndex = Math.max(0, Math.min(targetSectionIndex, sections.length - 1));
+      
+      // Smooth scroll to target section
+      const targetScrollTop = targetSectionIndex * windowHeight;
+      
+      container.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    };
+    
+    container.addEventListener('touchstart', handleTouchStart, { passive: false });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    container.addEventListener('touchend', handleTouchEnd);
+    
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
+  // Update active section based on scroll position
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+
+    const sections = ['hero', 'about', 'features'];
+    
+    const handleScroll = () => {
+      const scrollPosition = container.scrollTop;
+      const windowHeight = window.innerHeight;
+      
+      // Find which section is currently most visible
+      const currentSectionIndex = Math.round(scrollPosition / windowHeight);
+      const currentSection = sections[currentSectionIndex] || sections[0];
+      
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initialize on mount
+    
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [activeSection]);
+
+  // Move indicator when active section changes
+  useEffect(() => {
+    if (!indicatorRef.current) return;
+    
+    const activeLink = document.querySelector(`.options a[href="#${activeSection}"]`);
+    if (activeLink) {
+      const linkRect = activeLink.getBoundingClientRect();
+      const headerRect = document.querySelector('.options')?.getBoundingClientRect();
+      
+      if (headerRect) {
+        indicatorRef.current.style.width = `${linkRect.width}px`;
+        indicatorRef.current.style.left = `${linkRect.left - headerRect.left}px`;
+      }
+    }
+  }, [activeSection]);
+
+  // Function to scroll to the specified section
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Arrow component for reusability
+  const ScrollArrow = ({ targetSection }: { targetSection: string }) => (
+    <div className="scroll-down-arrow" onClick={() => scrollToSection(targetSection)}>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </div>
+  );
+
   return (
-    <motion.div className="landing-page" ref={ref}>
+    <div className="landing-page smooth-scroll-container" ref={ref}>
       <div className="floating-background">
         {floatingElements.map((element, index) => (
-          <motion.div
+          <div
             key={index}
             className={`floating-element ${element.className}`}
-            animate={{
-              x: element.x,
-              y: element.y,
-              rotate: element.rotate,
-              scale: element.scale,
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "reverse",
-              duration: element.duration,
-              ease: "easeInOut"
-            }}
-            >
-              <img src={element.image} alt={`Dashboard preview ${index + 1}`} />
-            </motion.div>
+          >
+            <img src={element.image} alt={`Dashboard preview ${index + 1}`} />
+          </div>
         ))}
         <div className="blur-overlay"></div>
       </div>
+      
       <header className="landing-header">
         <div className="logo">
           <img src={logoSvg} alt="Sho-Kanri logo" style={{width: '30px'}} />
           <img src={nameSvg} alt="Sho-Kanri" />
         </div>
         <div className='options'>
-          <a href='#hero'>Início</a>
-          <a href='#about'>Sobre</a>
-          <a href='#features'>Features</a>
+          <a href='#hero' className={activeSection === 'hero' ? 'active' : ''}>Início</a>
+          <a href='#about' className={activeSection === 'about' ? 'active' : ''}>Sobre</a>
+          <a href='#features' className={activeSection === 'features' ? 'active' : ''}>Features</a>
+          <div className="nav-indicator" ref={indicatorRef}></div>
         </div>
-        <Button onClick={onGetStarted} className="login-button">Login</Button>
+        <Button onClick={onGetStarted}>Login</Button>
       </header>
       
       <main className="landing-content">
-        <motion.section
-          id="hero"
-          className="hero"
-          style={{
-            opacity: heroOpacity,
-            scale: heroScale,
-            y: heroY,
-          }}>
+        <section id="hero" className="hero snap-section">
           <Player
             autoplay
             loop
@@ -116,23 +246,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             style={{ height: '200px', width: '200px' }}
           />
           <h1>Sho-Kanri</h1>
-          <motion.div
-            className="hero-description"
-            style={{
-              opacity: heroDescriptionOpacity
-            }}>
+          <div className="hero-description">
             <p>Controle suas finanças de forma simples e eficiente</p>
             <Button onClick={onGetStarted} size="lg" className="login-button">Get Started</Button>
-          </motion.div>
-        </motion.section>
+          </div>
+          
+          <ScrollArrow targetSection="about" />
+        </section>
         
-        <motion.section 
-          id="about"
-          className="about"
-          style={{
-            opacity: aboutOpacity,
-            y: aboutY
-          }}>
+        <section id="about" className="about snap-section">
           <div className="about-card">
             <img src={dinheiroPath} alt="" />
             <h3>O que é?</h3>
@@ -148,24 +270,20 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             <h3>Solução?</h3>
             <p>Ele ajuda a eliminar a confusão na gestão financeira, facilitando o acompanhamento dos gastos, o planejamento de orçamentos e a análise de desempenho financeiro</p>
           </div>
-        </motion.section>
+          
+          <ScrollArrow targetSection="features" />
+        </section>
 
-        <motion.section 
-          id="features" 
-          className="call-to-action"
-          style={{
-            opacity: ctaOpacity,
-            scale: ctaScale
-          }}>
+        <section id="features" className="call-to-action snap-section">
           <h2>Ready to take control of your finances?</h2>
-          <Button onClick={onGetStarted} size="lg" className="cta-button">Get Started</Button>
-        </motion.section>
+          <Button onClick={onGetStarted} size="lg">Get Started</Button>
+        </section>
       </main>
       
       <footer className="landing-footer">
         <p>© 2025 ShoKanri. All rights reserved.</p>
       </footer>
-    </motion.div>
+    </div>
   );
 };
 

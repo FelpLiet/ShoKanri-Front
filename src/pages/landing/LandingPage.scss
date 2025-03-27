@@ -5,6 +5,14 @@
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+  
+  // Hide scrollbar but keep functionality
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 .login-button {
@@ -29,12 +37,16 @@
   width: 100%;
   height: 100%;
   z-index: -1;
+  perspective: 1000px;
   
   .floating-element {
     position: absolute;
     border-radius: 12px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation: float3d 8s ease-in-out infinite alternate;
     
     img {
       width: 100%;
@@ -42,12 +54,13 @@
       object-fit: cover;
     }
     
-    // Use percentage-based positioning
     &.mock1 {
       width: 35%;
-      max-width: 5000px;
+      max-width: 500px;
       top: 20%;
       right: 10%;
+      transform: rotateY(-15deg) rotateX(5deg) translateZ(20px);
+      animation-delay: 0s;
       
       @media (max-width: 768px) {
         width: 40%;
@@ -60,6 +73,8 @@
       max-width: 500px;
       top: 45%;
       left: 15%;
+      transform: rotateY(15deg) rotateX(5deg) translateZ(20px);
+      animation-delay: 1s;
       
       @media (max-width: 768px) {
         width: 35%;
@@ -67,12 +82,12 @@
       }
     }
     
-    // If you need a third mock as mentioned in your SCSS
     &.mock3 {
       width: 28%;
       max-width: 500px;
       bottom: 15%;
       right: 20%;
+      animation-delay: 2s;
       
       @media (max-width: 768px) {
         width: 32%;
@@ -92,14 +107,61 @@
   }
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(-1deg) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotate(2deg) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotate(0deg) scale(0.99);
+  }
+}
+
+@keyframes float3d {
+  0% {
+    transform: translateY(0px) rotateY(-15deg) rotateX(5deg) translateZ(20px) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotateY(-12deg) rotateX(3deg) translateZ(30px) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotateY(-18deg) rotateX(8deg) translateZ(15px) scale(0.99);
+  }
+}
+
+@keyframes float3dReverse {
+  0% {
+    transform: translateY(0px) rotateY(15deg) rotateX(5deg) translateZ(20px) scale(0.98);
+  }
+  50% {
+    transform: translateY(15px) rotateY(12deg) rotateX(3deg) translateZ(30px) scale(1);
+  }
+  100% {
+    transform: translateY(5px) rotateY(18deg) rotateX(8deg) translateZ(15px) scale(0.99);
+  }
+}
+
+.floating-element {
+  &.mock1 {
+    animation: float3d 8s ease-in-out infinite alternate;
+  }
+  
+  &.mock2 {
+    animation: float3dReverse 8s ease-in-out infinite alternate;
+  }
+}
+
 .landing-header {
   position: fixed;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 48px;
   background-color: rgba(247, 247, 247, 0.216);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.099);
   backdrop-filter: blur(3px);
   z-index: 100;
   
@@ -112,26 +174,53 @@
   .options {
     display: flex;
     gap: 2rem;
+    position: relative;
+    padding-bottom: 10px;
     
     a {
       text-decoration: none;
       color: #333;
       font-weight: 500;
       transition: color 0.2s;
+      padding: 5px 0;
+      position: relative;
       
       &:hover {
-        color: #0070f3;
+        color: #000000; 
+      }
+      
+      &.active {
+        color: #000000;
+      }
+    }
+    
+    .nav-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      background: #000000; 
+      border-radius: 3px;
+      transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-header {
+    .options {
+      gap: 1rem;
+      
+      a {
+        font-size: 14px;
       }
     }
   }
 }
 
-
-
-  
 .landing-content {
-  height: 5000px;
-  overflow: visible;
+  position: relative;
 
   section {
     min-height: 100vh;
@@ -140,18 +229,17 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    margin-bottom: 100px;
+    width: 100%;
   }
   
   .hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    align-items: center;
     height: 100vh;
     text-align: center;
-    padding: 0;
-    position: fixed;
+    padding-top: 80px;
     
     h1 {
       color: var($primary);
@@ -174,9 +262,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
     gap: 1rem;
-    position: fixed;
+    padding-top: 80px;
     
     .about-card {
       background-color: white;
@@ -199,7 +286,7 @@
   
   .call-to-action {
     text-align: center;
-    position: static;
+    padding-top: 80px;
     
     h2 {
       font-size: 2.5rem;
@@ -208,7 +295,6 @@
   }
 }
 
-
 .landing-footer {
   padding: 2rem;
   text-align: center;
@@ -216,23 +302,303 @@
   backdrop-filter: blur(10px);
 }
 
-
-.cta-button {
-  background: linear-gradient(45deg, #0070f3, #00a1ff);
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 112, 243, 0.4);
-  }
-}
-
 @media (max-height: 600px) {
   .floating-element {
     &.mock1, &.mock2, &.mock3 {
       transform: scale(0.8);
+    }
+  }
+}
+
+// Replace snap-scroll-container with smooth-scroll-container
+.smooth-scroll-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  // Hide scrollbar but maintain functionality
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  // Add scroll timeline for smoother animations
+  @supports (scroll-timeline: works) {
+    scroll-timeline: --page-scroll block;
+  }
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  position: relative;
+  
+  // Improve scroll snap stopping
+  scroll-snap-stop: always;
+  
+  // Add padding at the bottom to make room for scroll arrows
+  padding-bottom: 70px;
+}
+
+.scroll-down-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.3s ease;
+  z-index: 10;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%) translateY(-5px);
+  }
+  
+  // Make arrow more visible on light backgrounds
+  .about &, .call-to-action & {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-20px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+}
+
+// Comprehensive responsive styles for mobile
+@media (max-width: 1024px) {
+  .landing-content {
+    .hero {
+      h1 {
+        font-size: 6rem;
+        letter-spacing: 10px;
+      }
+    }
+    
+    .about {
+      padding: 100px 10px 0;
+      
+      .about-card {
+        width: 280px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-header {
+    padding: 15px 20px;
+    
+    .options {
+      gap: 1.5rem;
+    }
+  }
+  
+  .landing-content {
+    .hero {
+      h1 {
+        font-size: 4.5rem;
+        letter-spacing: 8px;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        padding: 0 20px;
+      }
+    }
+    
+    .about {
+      padding-top: 80px;
+      gap: 1.5rem;
+      
+      .about-card {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 15px;
+      }
+    }
+    
+    .call-to-action {
+      h2 {
+        font-size: 2rem;
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+// Mobile-specific styles
+@media (max-width: 480px) {
+  .landing-header {
+    padding: 10px 15px;
+    
+    .logo {
+      gap: 8px;
+      
+      img:last-child {
+        max-width: 100px; // Smaller logo text on mobile
+      }
+    }
+    
+    .options {
+      gap: 0.8rem;
+      justify-content: center;
+      padding-bottom: 5px;
+      
+      a {
+        font-size: 12px;
+        padding: 5px 3px;
+      }
+    }
+    
+    button {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  .landing-content {
+    .hero {
+      padding-top: 60px;
+      
+      h1 {
+        font-size: 2.8rem;
+        letter-spacing: 4px;
+        margin-top: 0.5rem;
+      }
+      
+      p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .login-button {
+        padding: 0.6rem 1.5rem;
+      }
+    }
+    
+    .about {
+      padding-top: 60px;
+      
+      .about-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        
+        h3 {
+          font-size: 1.2rem;
+        }
+        
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .call-to-action {
+      h2 {
+        font-size: 1.5rem;
+        padding: 0 15px;
+      }
+    }
+  }
+  
+  .floating-element {
+    &.mock1, &.mock2 {
+      transform: none !important; // Remove 3D effect on small screens for better visibility
+      animation: float 8s ease-in-out infinite alternate !important;
+    }
+    
+    &.mock1 {
+      width: 75%;
+      top: 25%;
+      right: -10%;
+    }
+    
+    &.mock2 {
+      width: 65%;
+      left: -10%;
+      top: 55%;
+    }
+  }
+  
+  .scroll-down-arrow {
+    bottom: 15px;
+    
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  .snap-section {
+    padding-bottom: 50px;
+  }
+  
+  .landing-footer {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+// Add touch-specific improvements
+@media (pointer: coarse) {
+  .scroll-down-arrow {
+    padding: 12px; // Larger tap target for touch devices
+  }
+  
+  .landing-header {
+    .options a {
+      padding: 8px 5px; // Larger tap target for navigation
+    }
+  }
+  
+  button {
+    min-height: 44px; // Minimum height for touch targets
+  }
+}
+
+// Portrait mode on phones
+@media (max-width: 480px) and (orientation: portrait) {
+  .floating-background {
+    .blur-overlay {
+      background-color: rgba(255, 255, 255, 0.8); // More opacity for better readability
+    }
+  }
+  
+  // Fix issues with very small screens
+  @media (max-height: 600px) {
+    .landing-content {
+      .hero {
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero-description {
+          p {
+            margin-bottom: 1rem;
+          }
+        }
+      }
     }
   }
 }
