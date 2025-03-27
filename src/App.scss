@@ -9,7 +9,7 @@
 }
 
 .sidebar {
-  width: 250px; // Defina uma largura fixa para a sidebar
+  width: 250%; // Defina uma largura fixa para a sidebar
   background-color: $bg-primary;
   flex-shrink: 0; // Impede que a sidebar diminua
 }
@@ -17,7 +17,6 @@
 // Add desktop-specific global styles
 body {
   margin: 0;
-  // padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: $bg-secondary;
   overflow: hidden;
@@ -30,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: 100vh;
+  height: calc(100vh - 60px);
 }
 
 // Desktop breakpoints
