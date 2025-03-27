@@ -6,13 +6,14 @@ import {
   UpdateUserRequest,
 } from "../types/requests";
 import { Router } from "../types/router";
+import { verifyToken } from "../middlewares/verify-token";
 
 export const register: Router = (_schema, request) => {
   const { name, email, password } = JSON.parse(
-    request.requestBody
+    request.requestBody,
   ) as RegisterUserRequest;
 
-  const newUser = {
+  const user = {
     id: db.user.length + 1,
     createdOn: new Date().toISOString(),
     updatedOn: new Date().toISOString(),
@@ -22,20 +23,20 @@ export const register: Router = (_schema, request) => {
     password,
   };
 
-  db.user.push(newUser);
+  db.user.push(user);
 
-  return { id: newUser.id };
+  return { id: user.id };
 };
 
 export const login: Router = (_schema, request) => {
   const { email, password } = JSON.parse(
-    request.requestBody
+    request.requestBody,
   ) as LoginUserRequest;
 
   const user = db.user.find((entity) => entity.email == email);
 
   if (user === undefined || user.password !== password) {
-    return { error: "credentials isn't valid!" };
+    return new Response(400, {}, { error: "credentials isn't valid!" });
   }
   return {
     userId: user.id,
@@ -44,17 +45,17 @@ export const login: Router = (_schema, request) => {
 };
 
 export const remove: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
 
   const index = db.user.findIndex((entity) => entity.id === id);
 
   if (index === -1) {
-    return { error: "user not found" };
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
   db.user.splice(index, 1);
 
@@ -62,38 +63,38 @@ export const remove: Router = (_schema, request) => {
 };
 
 export const update: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
   const { name, email } = JSON.parse(request.requestBody) as UpdateUserRequest;
 
-  const index = db.user.findIndex((entity) => entity.id === id);
+  const user = db.user.find((entity) => entity.id === id);
 
-  if (index === -1) {
-    return { error: "user not found" };
+  if (!user) {
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
-  const userIndex = db.user[index];
-  userIndex.name = name ?? userIndex.name;
-  userIndex.email = email ?? userIndex.email;
+  user.name = name ?? user.name;
+  user.email = email ?? user.email;
+  user.updatedOn = new Date().toISOString();
 
   return new Response(204);
 };
 
 export const getById: Router = (_schema, request) => {
-  const token = request.requestHeaders.Authorization.split(" ")[1];
+  const unauthorize = verifyToken(request);
 
-  if (token !== db.authToken) {
-    return new Response(401);
+  if (unauthorize) {
+    return unauthorize;
   }
   const id = Number(request.params.id);
 
   const user = db.user.find((entity) => entity.id === id);
 
   if (!user) {
-    return { error: "user not found" };
+    return new Response(404, {}, { error: `user with id ${id} not found!` });
   }
   return user;
 };
